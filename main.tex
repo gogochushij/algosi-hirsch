@@ -1,0 +1,78 @@
+\documentclass{article}
+
+\usepackage[english, russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{listings} %нужно заменить листинги на algorithm2e
+\usepackage[ruled]{algorithm2e}
+\usepackage{comment}
+\usepackage{hyperref}
+\usepackage{pgffor}
+
+% Margins
+\usepackage[top=2.5cm, left=3cm, right=3cm, bottom=3.0cm]{geometry}
+% Colour table cells
+\usepackage[table]{xcolor}
+
+% Get larger line spacing in table
+\newcommand{\tablespace}{\\[1.25mm]}
+\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % = `top' strut
+\newcommand\tstrut{\rule{0pt}{2.0ex}}         % = `top' strut
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
+
+% My commands
+\newcommand{\statement}[2] {\textit{\textbf{#1} #2}}
+\newcommand{\e} {\varepsilon}
+\newcommand{\summ}[2][ ]{\underset{#2}{\overset{#1}{\sum}}}
+\newcommand{\minn}[1]{\underset{#1}{\min}}
+\newcommand{\maxx}[1]{\underset{#1}{\max}}
+\newcommand{\ceil}{\text{ceil}}
+\newcommand{\needpicture} {
+    {
+        \begin{center}
+        \rowcolors{1}{yellow!75}{yellow!75}
+        \begin{tabular}{|c|}
+            \hline
+            Здесь нужна картинка\\
+            \hline
+        \end{tabular}
+        \end{center}
+    }
+}
+
+
+%%%%%%%%%%%%%%%%%
+%     Title     %
+%%%%%%%%%%%%%%%%%
+\title{Алгосы, часть ii}
+\author{Денис Осипов, Иван Ермошин, Alexander Grothendieck}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+%\lstset{%
+%emph={%  
+%    if, for, parallel, else, function, to, while, such, that, and, is%
+%    },
+%    emphstyle={\bfseries},%
+%}%
+
+\input{prologue.tex}
+\tableofcontents \newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Здесь настроить конспект для компиляции
+% Чтобы скомпилировать все, что есть, впишите:
+% \foreach \n \in {1,...,6, 20, 21} {\input{que\n.tex}} 
+% ВМЕСТО строки ниже
+\foreach \n in {20,21} {\input{que\n.tex}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% que6.tex ссылается на que5.tex
+% que21.tex ссылается на que20.tex
+
+\end{document}
