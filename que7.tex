@@ -96,7 +96,7 @@
 	$$
 	\end{multline*}
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{someshit4}
 	Величина любого потока не превышает пропускную способность любого разреза.
 \end{lemma}
 \begin{proof}
@@ -115,8 +115,8 @@
 \begin{proof}$ $\newline %dirty hack to newline
 	\begin{itemize}
 		\item[$\mathrm{1}\Rightarrow\mathrm{2}$] Если есть увеличивающий путь, то по лемме~\ref{someshit2} можно построить поток со строго большей величиной, то есть $f$ не максимальный.
-		\item[$\mathrm{2}\Rightarrow\mathrm{3}$] Предположим, что нет увеличивающего пути. Определим $S=\{v\in V|\exists p\colon s\to v\textrm{ in }G_f\}, T=V\smallsetminus S$. Понятно, что это разрез. В нем для любой пары $(u,v)\in S\times T$ выполняется $f(u,v)=c(u,v)$, потому что иначе бы ребро $(u,v)$ попало бы в $E_f$ (напомню, что там находятся только те ребра, у которых неотрицательная остаточная пропускная способность) а значит существовал бы путь из $s$ в $v$, это противоречит $v\in T$. $$|f|=\sum_{x\in S}\sum_{y\in T}f(x,y)=\sum_{x\in S}\sum_{y\in T}c(x,y)$$
-		\item[$\mathrm{3}\Rightarrow\mathrm{1}$] Из леммы~\ref{someshit3} следует, что $|f|\le c(S,T)$. Поэтому если достигается равенство, то $f$~--- максимальный.
+		\item[$\mathrm{2}\Rightarrow\mathrm{3}$] Предположим, что нет увеличивающего пути. Определим $S=\{v\in V|\exists p\colon s\to v\textrm{ in }G_f\}, T=V\smallsetminus S$. Понятно, что это разрез. В нем для любой пары $(u,v)\in S\times T$ выполняется $f(u,v)=c(u,v)$, потому что иначе бы ребро $(u,v)$ попало бы в $E_f$ (напомню, что там находятся только те ребра, у которых положительная остаточная пропускная способность) а значит существовал бы путь из $s$ в $v$, это противоречит $v\in T$. $$|f|=\sum_{x\in S}\sum_{y\in T}f(x,y)=\sum_{x\in S}\sum_{y\in T}c(x,y)$$
+		\item[$\mathrm{3}\Rightarrow\mathrm{1}$] Из леммы~\ref{someshit4} следует, что $|f|\le c(S,T)$. Поэтому если достигается равенство, то $f$~--- максимальный.
 	\end{itemize}
 \end{proof}
 
