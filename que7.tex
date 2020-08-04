@@ -57,7 +57,7 @@
 \begin{lemma}\label{someshit2}
 	$G,c,s,t$~--- сеть с потоком $f$, $p$~--- увеличивающий путь в $G_f$. Определим $f_p\colon V\times V\to\mathbb{R}$.
 	$$
-	f(u,v)=
+	f_p(u,v)=
 	\begin{cases}
 		c_f(p), & (u,v)\in p,\\
 		-c_f(p), & (v,u)\in p,\\
@@ -67,9 +67,9 @@
 	где $c_f(p)=\min\{c_f(u,v)|(u,v)\in p\}$.
 	Тогда $f_p$~--- поток в $G$ с величиной $c_f(p)>0$.
 \end{lemma}
-\begin{proof}
+\begin{proof}$ $\newline
 	\begin{enumerate}
-		\item $$f(u,v)\le c_f(p)\le c_f(u,v)=c(u,v)-f(u,v)\le c(u,v)$$
+		\item $$f_p(u,v)\le c_f(p)\le c_f(u,v)=c(u,v)-f(u,v)\le c(u,v)$$ если $f(u,v)\ge 0$. Остальные случаи тривиальны.
 		\item \ldots
 		\item Заметим, что для любой вершины $v$ (не источника и не стока) в путь входит ровно одно ребро $(u,v)$ и ровно одно ребро $(v,w)$, то есть у всех остальных ребер потоки будут нулевые, а у этих они отличаются знаком, поэтому сумма потоков  $\sum_{v\in V}f_p(u,v)=0$.
 	\end{enumerate}
@@ -133,6 +133,89 @@ function FFA(`$\langle G=\langle V,E\rangle,c,s,t\rangle$`):
 			`$f(v,u)$` := `$-f(u,v)$`
 \end{lstlisting}
 
-На практике, понятно, он возникает в основном только с целыми числами. В этом предположении (в кормене написано, что если значения пропускной способности иррациональные, то ничего работать не будет, я не понимаю, почему) время его работы составляет $O(|E||f^*|)$, где $f^*$~--- максимальный поток.
+На практике, понятно, он возникает в основном только с целыми числами. Если же значения весов иррациональные, то алгоритм может и зависнуть.
 
-Первый цикл выполняется за время $\Theta(|E|)$, второй цикл выполняется не более $|f^*|$ раз (потому что величина потока в каждую итерацию увеличивается хотя бы на 1). Как долго он выполняется зависит от того, как мы храним граф. Если его как-то там непонятно хранить я это потом напишу, то поиск в ширину работает за $O(V+E')=O(E)$.
+\begin{example}
+Вот в такой сети алгоритм будет выполняться бесконечно долго и не будет сходиться к правильному ответу:
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,235); %set diagram left start at 0, and has height of 235
+%Shape: Circle [id:dp062013207712154794] 
+\draw   (347,37) .. controls (347,23.19) and (358.19,12) .. (372,12) .. controls (385.81,12) and (397,23.19) .. (397,37) .. controls (397,50.81) and (385.81,62) .. (372,62) .. controls (358.19,62) and (347,50.81) .. (347,37) -- cycle ;
+%Straight Lines [id:da12150689014580618] 
+\draw    (347,37) -- (203.87,90.3) ;
+\draw [shift={(202,91)}, rotate = 339.57] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Circle [id:dp22596873627634528] 
+\draw   (177,116) .. controls (177,102.19) and (188.19,91) .. (202,91) .. controls (215.81,91) and (227,102.19) .. (227,116) .. controls (227,129.81) and (215.81,141) .. (202,141) .. controls (188.19,141) and (177,129.81) .. (177,116) -- cycle ;
+%Shape: Circle [id:dp4804239996566908] 
+\draw   (499,115) .. controls (499,101.19) and (510.19,90) .. (524,90) .. controls (537.81,90) and (549,101.19) .. (549,115) .. controls (549,128.81) and (537.81,140) .. (524,140) .. controls (510.19,140) and (499,128.81) .. (499,115) -- cycle ;
+%Shape: Circle [id:dp2788070487240514] 
+\draw   (285,115) .. controls (285,101.19) and (296.19,90) .. (310,90) .. controls (323.81,90) and (335,101.19) .. (335,115) .. controls (335,128.81) and (323.81,140) .. (310,140) .. controls (296.19,140) and (285,128.81) .. (285,115) -- cycle ;
+%Shape: Circle [id:dp8904744358830853] 
+\draw   (396,114) .. controls (396,100.19) and (407.19,89) .. (421,89) .. controls (434.81,89) and (446,100.19) .. (446,114) .. controls (446,127.81) and (434.81,139) .. (421,139) .. controls (407.19,139) and (396,127.81) .. (396,114) -- cycle ;
+%Shape: Circle [id:dp6392423508319897] 
+\draw   (348,184) .. controls (348,170.19) and (359.19,159) .. (373,159) .. controls (386.81,159) and (398,170.19) .. (398,184) .. controls (398,197.81) and (386.81,209) .. (373,209) .. controls (359.19,209) and (348,197.81) .. (348,184) -- cycle ;
+%Straight Lines [id:da18206882445512274] 
+\draw    (360,59.25) -- (328.37,92.79) ;
+\draw [shift={(327,94.25)}, rotate = 313.32] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da4116158387637876] 
+\draw    (397,37) -- (522.15,89.23) ;
+\draw [shift={(524,90)}, rotate = 202.65] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6393442444559655] 
+\draw    (285,115) -- (229,115.97) ;
+\draw [shift={(227,116)}, rotate = 359.01] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da9200946912364403] 
+\draw    (335,115) -- (394,114.03) ;
+\draw [shift={(396,114)}, rotate = 539.06] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da3038479987969267] 
+\draw    (499,115) -- (448,114.04) ;
+\draw [shift={(446,114)}, rotate = 361.08000000000004] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da4917567000192774] 
+\draw    (202,141) -- (346.08,183.43) ;
+\draw [shift={(348,184)}, rotate = 196.41] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da16844845591921243] 
+\draw    (524,140) -- (399.89,183.34) ;
+\draw [shift={(398,184)}, rotate = 340.75] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da21552238806972335] 
+\draw    (405,134.25) -- (374.58,157.78) ;
+\draw [shift={(373,159)}, rotate = 322.28] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (195,107.4) node [anchor=north west][inner sep=0.75pt]    {$v_{1}$};
+% Text Node
+\draw (366,28.4) node [anchor=north west][inner sep=0.75pt]    {$s$};
+% Text Node
+\draw (367,177.4) node [anchor=north west][inner sep=0.75pt]    {$t$};
+% Text Node
+\draw (303,105.4) node [anchor=north west][inner sep=0.75pt]    {$v_{2}$};
+% Text Node
+\draw (413,104.4) node [anchor=north west][inner sep=0.75pt]    {$v_{3}$};
+% Text Node
+\draw (518,104.4) node [anchor=north west][inner sep=0.75pt]    {$v_{4}$};
+% Text Node
+\draw (333,59.4) node [anchor=north west][inner sep=0.75pt]    {$3$};
+% Text Node
+\draw (264,45.4) node [anchor=north west][inner sep=0.75pt]    {$3$};
+% Text Node
+\draw (462,45.4) node [anchor=north west][inner sep=0.75pt]    {$3$};
+% Text Node
+\draw (254,93.4) node [anchor=north west][inner sep=0.75pt]    {$1$};
+% Text Node
+\draw (359,92.4) node [anchor=north west][inner sep=0.75pt]    {$1$};
+% Text Node
+\draw (454,145.4) node [anchor=north west][inner sep=0.75pt]    {$3$};
+% Text Node
+\draw (378,132.4) node [anchor=north west][inner sep=0.75pt]    {$3$};
+% Text Node
+\draw (266,163.4) node [anchor=north west][inner sep=0.75pt]    {$3$};
+% Text Node
+\draw (445,88.4) node [anchor=north west][inner sep=0.75pt]    {$c=\frac{\sqrt{5} -1}{2}$};
+\end{tikzpicture}
+
+Величина максимального потока в этой сети равна $7=2\cdot3+1$ (на ребрах $s\to v_1\to t$ и $s\to v_4\to t$ его значение 3, на ребрах $s\to v_2\to v_3\to t$ его значение 1). 
+\end{example}
+
+В предположении, что числа рациональные (их можно свести к целым) время его работы составляет $O(|E||f^*|)$, где $f^*$~--- максимальный поток.
+
+Проанализируем время работы. Первый цикл выполняется за время $\Theta(|E|)$, второй цикл выполняется не более $|f^*|$ раз (потому что величина потока в каждую итерацию увеличивается хотя бы на 1). Как долго он выполняется зависит от того, как мы храним граф. Если его как-то там непонятно хранить я это потом напишу, то поиск в ширину работает за $O(V+E')=O(E)$.
