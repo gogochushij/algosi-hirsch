@@ -2,7 +2,7 @@
 
 \usepackage[english, russian]{babel}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb}
 \usepackage{parskip}
 \usepackage{graphicx}
 \usepackage{listings} %нужно заменить листинги на algorithm2e
@@ -15,8 +15,6 @@
 \usepackage[top=2.5cm, left=3cm, right=3cm, bottom=3.0cm]{geometry}
 % Colour table cells
 \usepackage[table]{xcolor}
-
-\usepackage{tikz}
 
 % Get larger line spacing in table
 \newcommand{\tablespace}{\\[1.25mm]}
@@ -50,9 +48,6 @@
 \newtheorem{problem}{Задача}[section]
 \newtheorem{lemma}{Лемма}[section]
 
-%Author tags
-\newcommand{\groth} {Grothendieck A.}
-
 %%%%%%%%%%%%%%%%%
 %     Title     %
 %%%%%%%%%%%%%%%%%
@@ -79,7 +74,7 @@
 % Чтобы скомпилировать все, что есть, впишите:
 % \foreach \n \in {1,...,6, 20, 21} {\input{que\n.tex}} 
 % ВМЕСТО строки ниже
-\foreach \n in {1,...,7,12,20,21} {\input{que\n.tex}}
+\foreach \n in {13} {\input{que\n.tex}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % que6.tex ссылается на que5.tex
