@@ -11,21 +11,21 @@
 
 \statement{Приближенное $\frac{1}{1-\e}$-оптимальное решение за $O(\frac{n^3}{\e})$.}{} 
 
-Зафиксируем параметр $\e>0$. Заменим все $v_i$ на: $$\hat{v_i} = [\frac{n}{\e} \cdot \frac{v_i}{v_{max}}]$$ Запустим на новом наборе алгоритм ДП выше. Описание алгоритма закончено.
+Зафиксируем параметр $\e>0$. Заменим все $v_i$ на: $$\hat{v_i} = \left[\frac{n}{\e} \cdot \frac{v_i}{v_{max}}\right]$$ Запустим на новом наборе алгоритм ДП выше. Описание алгоритма закончено.
 
-Оценим время работы. $V = \sum v_i \leq n\cdot \frac{n}{\e} = \frac{n^2}{\e}$. Поэтому время $O(n \cdot \frac{n^2}{\e}) = O(\frac{n^3}{\e})$.
+Оценим время работы. $V = \sum v_i \leq n\cdot \frac{n}{\e} = \frac{n^2}{\e}$. Поэтому время $O\left(n \cdot \frac{n^2}{\e}\right) = O\left(\frac{n^3}{\e}\right)$.
 
 Теперь точность. 
 
-Пусть оптимальное решение исходной задачи -- набор $S$, его стоимость с точки зрения старой задачи $K^* = \sum\limits_{i\in S} v_i$. 
+Пусть оптимальное решение исходной задачи -- набор $S$, его стоимость с точки зрения старой задачи $K^* = \sum\limits_{i\in S} v_i$.
 
 С точки зрения новой задачи сумма этого набора оценивается как: 
-$$\sum_{i\in S} \hat{v_i} = \sum_{i\in S} [\frac{v_i n}{\e v_{max}}] \geq \sum_{i\in S} (v_i \cdot \frac{n}{\e v_{max}} - 1) \geq K^*\frac{n}{\e v_{max}} - n$$
+$$\sum_{i\in S}\hat{v_i} = \sum_{i\in S} \left[\frac{v_i n}{\e v_{max}}\right] \geq \sum_{i\in S} \left(v_i \cdot \frac{n}{\e v_{max}} - 1\right) \geq K^*\frac{n}{\e v_{max}} - n$$
 
-С точки зрения новой задачи набор $S$ необязательно оптимален. То есть, если $\hat{S}$ -- оптимальный с точки зрения новой задачи набор, то имеем $$\sum_{i\in\hat S} \hat{v_i} \geq \sum_{i\in S} \hat{v_i} \geq K^*\frac{n}{\e v_{max}} - n$$
+С точки зрения новой задачи набор $S$ необязательно оптимален. То есть, если $\hat{S}$ -- оптимальный с точки зрения новой задачи набор, то имеем $$\sum_{i\in\hat S}\hat{v_i} \geq \sum_{i\in S} \hat{v_i} \geq K^*\frac{n}{\e v_{max}} - n$$
 
-Нужно оценить, насколько стоимости наборов $S$ и $\hat S$ отличаются с точки зрения старой задачи, т.е. сравнить величины $\sum\limits_{i\in S}v_i = K^*$ и $\sum\limits_{i\in\hat S} v_i$. Что же, так как $\hat{v_i} \leq \frac{v_i n}{\e v_{max}}$,
+Нужно оценить, насколько стоимости наборов $S$ и $\hat S$ отличаются с точки зрения старой задачи, т.е. сравнить величины $\sum\limits_{i\in S}v_i = K^*$ и $\sum\limits_{i\in\hat S}v_i$. Что же, так как $\hat{v_i} \leq \frac{v_i n}{\e v_{max}}$,
 
-$$\sum_{i\in\hat S}v_i \geq \sum_{i\in\hat S} \hat{v_i} \frac{\e v_{max}}{n} \geq (K^*\frac{n}{\e v_{max}} - n)\frac{\e v_{max}}{n} = K^* - \e v_{max} \geq K^* - \e K^* = K^*(1-\e)$$
+$$\sum_{i\in\hat S}v_i \geq \sum_{i\in\hat S} \hat{v_i} \frac{\e v_{max}}{n} \geq \left(K^*\frac{n}{\e v_{max}} - n\right)\frac{\e v_{max}}{n} = K^* - \e v_{max} \geq K^* - \e K^* = K^*(1-\e)$$
 
 Таким образом, полученное решение  хуже оптимального не более, чем в $\frac{1}{1-\e}$ раз. $\blacksquare$

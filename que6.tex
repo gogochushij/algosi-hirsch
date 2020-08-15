@@ -16,7 +16,7 @@ while I is not a set cover:
     `$l$` `$=$` any index j such that `$\hat{S_j} \neq \emptyset $` and `$\frac{w_j}{|\hat{S_j}|}$` is minimal
     I.append(`$l$`)
     for `$j$`=1..m:
-        `$\hat{S_j} = \hat{S_j}\setminus S_l$`
+        `$\hat{S_j} = \hat{S_j}\smallsetminus S_l$`
 \end{lstlisting}
 
 Ясно, что этот алгоритм действительно дает покрытие всего $E$. Нужно доказать точность.
@@ -29,10 +29,10 @@ $$w_i \leq \frac{n_k - n_{k+1}}{n_k}OPT$$
 
 По модулю этого факта доказываем $H_n$-оптимальность. Пусть $I$ -- множество индексов, найденное жадным алгоритмом. Тогда суммарный вес всех выбранных множеств оценивается как:
 
-$$\sum_{j\in I} w_j \leq \sum^l_{k=1}\frac{n_k-n_{k+1}}{n_k} OPT$$ 
-$$ = OPT\cdot\sum^l_{k=1}(\underbrace{\frac{1}{n_k} + ... + \frac{1}{n_k}}_{n_k-n_{k+1}\text{ раз}})$$
-$$ \leq OPT \cdot\sum^l_{k=1} (\frac{1}{n_k} + \frac{1}{n_k - 1} + ... + \frac{1}{n_{k+1}+1})$$ 
-$$ = OPT\cdot\sum^n_{k=1}\frac{1}{k} = OPT\cdot H_n$$
+$$\sum_{j\in I}w_j \leq \sum_{k=1}^l\frac{n_k-n_{k+1}}{n_k} OPT$$
+$$ = OPT\cdot\sum_{k=1}^l\left(\underbrace{\frac{1}{n_k} + ... + \frac{1}{n_k}}_{n_k-n_{k+1}\text{ раз}}\right)$$
+$$ \leq OPT \cdot\sum_{k=1}^l\left(\frac{1}{n_k} + \frac{1}{n_k - 1} + ... + \frac{1}{n_{k+1}+1}\right)$$
+$$ = OPT\cdot\sum_{k=1}^n\frac{1}{k} = OPT\cdot H_n$$
 Это и требовалось. Теперь доказываем неравенство $w_i \leq \frac{n_k - n_{k+1}}{n_k}OPT$.
 
 Для данной итерации $k$ и выбранного на ней элемента $S_i$ обозначим $I_k$ -- множество индексов, выбранных на итерациях $1, ..., k-1$, а для всякого $j=1...m$ положим $\hat{S_j} = S_j \setminus \bigcup_{p \in I_k}S_p$ -- множество элементов из $S_j$, которые были покрыты на $k$-той итерации. Заметьте, что получается ровно те $\hat{S_j}$, которые фигурируют в псевдокоде. По смыслу алгоритма получается $$\frac{w_i}{|\hat{S_i}|} = \min_{j:\, \hat{S_j}\neq \emptyset} \frac{w_j}{|\hat{S_j}|}.$$
@@ -42,7 +42,7 @@ $$ = OPT\cdot\sum^n_{k=1}\frac{1}{k} = OPT\cdot H_n$$
 $$\min_{j=1..q} \frac{a_j}{b_j} \leq \frac{\sum\limits_{j=1..q} a_j}{\sum\limits_{j=1..q} b_j} \leq \max_{j=1..q} \frac{a_j}{b_j}$$
 
 Применим его первую часть для чисел $w_j, |\hat{S_j}|$, где $j \in O$, получим:
-$$\min_{j\in O} \frac{w_j}{|\hat{S_j}|} \leq \frac{\sum\limits_{j \in O} w_j}{\sum\limits_{j \in O} |\hat{S_j}|}$$
+$$\min_{j\in O} \frac{w_j}{\left|\hat{S_j}\right|} \leq \frac{\sum\limits_{j \in O} w_j}{\sum\limits_{j \in O} |\hat{S_j}|}$$
 Числитель просто равен $OPT$ по определению, а знаменатель не меньше $n_k = |\bigcup_{j \in O} \hat{S_j}|$ (это просто количество оставшихся непокрытых элементов!). Резюмируя, имеем: $$\frac{w_i}{|\hat{S_i}|} \leq \frac{OPT}{n_k}$$
 А так как на $k$-той итерации покрываем $|\hat{S_i}| = n_k - n_{k+1}$, получаем наконец:
 $$w_i \leq \frac{|\hat{S_i}|\cdot OPT}{n_k} = \frac{(n_k-n_{k+1})\cdot OPT}{n_k}\;\blacksquare$$
