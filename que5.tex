@@ -101,10 +101,9 @@ $$j \in I' \iff \sum_{i:\, e_i \in S_j}y_i^* = w_j,$$
 \underline{Найденный набор S-ок действительно покрывает все $E$}.
 
 Действительно, пусть какое-то $e_k$ оказалось не покрытым. Тогда в $I'$ не взяты все $j$ такие, что $S_j$ содержит $e_k$, т.е. для всех $S_j \ni e_k$ справедливо $$\sum_{i:\, e_i \in S_j}y_i^* < w_j.$$ 
-Обозначим $\e = \min_{j:\, e_k \in S_j} (w_j - \sum\limits_{i:\, e_i \in S_j}y_i^*) > 0$. Определим столбец $y'$ следующим образом: $y_k' = y_k^* + \e$, а все остальные $y_j' = y_j^*$. Покажем, что это решение подходит в нашу ЛП-задачу. 
+Обозначим $\e = \min\limits_{j:\, e_k \in S_j} (w_j - \sum\limits_{i:\, e_i \in S_j}y_i^*) > 0$. Определим столбец $y'$ следующим образом: $y_k' = y_k^* + \e$, а все остальные $y_j' = y_j^*$. Покажем, что это решение подходит в нашу ЛП-задачу. 
 
-1) Для всякого $S_j \ni e_k$ имеем $\sum
-\limits_{i: e_i \in S_j} y_i' = \e + \sum\limits_{i: e_i \in S_j} y_i^* \overset{\text{def }\e}{\leq} (w_j - \sum\limits_{i:\, e_i \in S_j}y_i^*) + \sum\limits_{i:\, e_i \in S_j}y_i^* = w_j$
+1) Для всякого $S_j \ni e_k$ имеем $\sum\limits_{i: e_i \in S_j} y_i' = \e + \sum\limits_{i: e_i \in S_j} y_i^* \overset{\text{def }\e}{\leq} (w_j - \sum\limits_{i:\, e_i \in S_j}y_i^*) + \sum\limits_{i:\, e_i \in S_j}y_i^* = w_j$
 
 2) А для всякого $S_j \not\ni e_k$ имеем просто $\sum\limits_{i: e_i \in S_j} y_i' = \sum\limits_{i: e_i \in S_j} y_i^* \leq w_j$. 
 
