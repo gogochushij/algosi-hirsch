@@ -39,10 +39,10 @@ $$ = OPT\cdot\sum_{k=1}^n\frac{1}{k} = OPT\cdot H_n$$
 Обозначим за $O$ множество индексов в оптимальном решении (т.е. соответствующее суммарному весу $OPT$). Ясно, что $j \in O \implies \hat{S_j} \neq \emptyset$, так что: $$\min_{j:\, \hat{S_j}\neq \emptyset} \frac{w_j}{|\hat{S_j}|} \leq \min_{j \in O} \frac{w_j}{|\hat{S_j}|}$$
 
 Вспомним такое неравенство из курса анализа. \textit{Пусть $a_1, ..., a_q, b_1, ..., b_q$ -- положительные числа. Тогда}
-$$\min_{j=1..q} \frac{a_j}{b_j} \leq \frac{\sum_{j=1..q} a_j}{\sum_{j=1..q} b_j} \leq \max_{j=1..q} \frac{a_j}{b_j}$$
+$$\min_{j=1..q} \frac{a_j}{b_j} \leq \frac{\sum_{j=1..q} a_j}{\sum\limits_{j=1..q} b_j} \leq \max_{j=1..q} \frac{a_j}{b_j}$$
 
 Применим его первую часть для чисел $w_j, |\hat{S_j}|$, где $j \in O$, получим:
-$$\min_{j\in O} \frac{w_j}{|\hat{S_j}|} \leq \frac{\sum_{j \in O} w_j}{\sum_{j \in O} |\hat{S_j}|}$$
+$$\min_{j\in O} \frac{w_j}{\left|\hat{S_j}\right|} \leq \frac{\sum\limits_{j \in O} w_j}{\sum\limits_{j \in O} |\hat{S_j}|}$$
 Числитель просто равен $OPT$ по определению, а знаменатель не меньше $n_k = |\bigcup_{j \in O} \hat{S_j}|$ (это просто количество оставшихся непокрытых элементов!). Резюмируя, имеем: $$\frac{w_i}{|\hat{S_i}|} \leq \frac{OPT}{n_k}$$
 А так как на $k$-той итерации покрываем $|\hat{S_i}| = n_k - n_{k+1}$, получаем наконец:
 $$w_i \leq \frac{|\hat{S_i}|\cdot OPT}{n_k} = \frac{(n_k-n_{k+1})\cdot OPT}{n_k}\;\blacksquare$$
