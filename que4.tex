@@ -17,15 +17,15 @@
 
 Теперь точность. 
 
-Пусть оптимальное решение исходной задачи -- набор $S$, его стоимость с точки зрения старой задачи $K^* = \summ{i\in S} v_i$. 
+Пусть оптимальное решение исходной задачи -- набор $S$, его стоимость с точки зрения старой задачи $K^* = \sum\limits_{i\in S} v_i$. 
 
 С точки зрения новой задачи сумма этого набора оценивается как: 
-$$\summ{i\in S}\hat{v_i} = \summ{i\in S} [\frac{v_i n}{\e v_{max}}] \geq \summ{i\in S} (v_i \cdot \frac{n}{\e v_{max}} - 1) \geq K^*\frac{n}{\e v_{max}} - n$$
+$$\sum_{i\in S} \hat{v_i} = \sum_{i\in S} [\frac{v_i n}{\e v_{max}}] \geq \sum_{i\in S} (v_i \cdot \frac{n}{\e v_{max}} - 1) \geq K^*\frac{n}{\e v_{max}} - n$$
 
-С точки зрения новой задачи набор $S$ необязательно оптимален. То есть, если $\hat{S}$ -- оптимальный с точки зрения новой задачи набор, то имеем $$\summ{i\in\hat S}\hat{v_i} \geq \summ{i\in S} \hat{v_i} \geq K^*\frac{n}{\e v_{max}} - n$$
+С точки зрения новой задачи набор $S$ необязательно оптимален. То есть, если $\hat{S}$ -- оптимальный с точки зрения новой задачи набор, то имеем $$\sum_{i\in\hat S} \hat{v_i} \geq \sum_{i\in S} \hat{v_i} \geq K^*\frac{n}{\e v_{max}} - n$$
 
-Нужно оценить, насколько стоимости наборов $S$ и $\hat S$ отличаются с точки зрения старой задачи, т.е. сравнить величины $\summ{i\in S}v_i = K^*$ и $\summ{i\in\hat S}v_i$. Что же, так как $\hat{v_i} \leq \frac{v_i n}{\e v_{max}}$,
+Нужно оценить, насколько стоимости наборов $S$ и $\hat S$ отличаются с точки зрения старой задачи, т.е. сравнить величины $\sum\limits_{i\in S}v_i = K^*$ и $\sum\limits_{i\in\hat S} v_i$. Что же, так как $\hat{v_i} \leq \frac{v_i n}{\e v_{max}}$,
 
-$$\summ{i\in\hat S}v_i \geq \summ{i\in\hat S} \hat{v_i} \frac{\e v_{max}}{n} \geq (K^*\frac{n}{\e v_{max}} - n)\frac{\e v_{max}}{n} = K^* - \e v_{max} \geq K^* - \e K^* = K^*(1-\e)$$
+$$\sum_{i\in\hat S}v_i \geq \sum_{i\in\hat S} \hat{v_i} \frac{\e v_{max}}{n} \geq (K^*\frac{n}{\e v_{max}} - n)\frac{\e v_{max}}{n} = K^* - \e v_{max} \geq K^* - \e K^* = K^*(1-\e)$$
 
 Таким образом, полученное решение  хуже оптимального не более, чем в $\frac{1}{1-\e}$ раз. $\blacksquare$
