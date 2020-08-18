@@ -45,4 +45,4 @@ $$\min_{j=1..q} \frac{a_j}{b_j} \leq \frac{\sum\limits_{j=1..q} a_j}{\sum\limits
 $$\min_{j\in O} \frac{w_j}{\left|\hat{S_j}\right|} \leq \frac{\sum\limits_{j \in O} w_j}{\sum\limits_{j \in O} |\hat{S_j}|}$$
 Числитель просто равен $OPT$ по определению, а знаменатель не меньше $n_k = |\bigcup_{j \in O} \hat{S_j}|$ (это просто количество оставшихся непокрытых элементов!). Резюмируя, имеем: $$\frac{w_i}{|\hat{S_i}|} \leq \frac{OPT}{n_k}$$
 А так как на $k$-той итерации покрываем $|\hat{S_i}| = n_k - n_{k+1}$, получаем наконец:
-$$w_i \leq \frac{|\hat{S_i}|\cdot OPT}{n_k} = \frac{(n_k-n_{k+1})\cdot OPT}{n_k}\;\blacksquare$$
+$$w_i \leq \frac{|\hat{S_i}|\cdot OPT}{n_k} = \frac{(n_k-n_{k+1})\cdot OPT}{n_k}$$\qed
