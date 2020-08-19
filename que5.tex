@@ -131,14 +131,16 @@ $$ \leq \sum_{i=1}^nf_iy_i^* \leq f\sum_{i=1}^n y_i^*$$
 
 Вспомним, как мы из решения двойственной ЛП-задачи построили приближенное решение исходной, и \underline{как мы доказали}, что это решение. Идея доказательства -- если данное $I$ не покрытие, то можем увеличить переменную, отвечающую за непокрытый элемент, -- порождает следующий алгоритм:
 
-\begin{lstlisting}[escapeinside=``]
-function PrimalDual (`$E = \{e_1, \ldots, e_n\}$`, `$S_1, \ldots, S_m$`):
-`$y$` `$=$` [0] * n
-I `$=$` []
-while `$\exists e_i \notin \underset{j\in I}{\bigcup} S_j$`:
-    `$l =$` all indices such that `$e_i \in S_l$` and `$\e = \left(w_l - \sum\limits_{k: e_k \in S_l}y_k\right)$` is minimal
-    `$y_i$` += `$\e$`
-    I.append(`$l$`)
-\end{lstlisting}
+\begin{algorithm}
+    \SetKwFunction{PrimalDual}{PrimalDual}
+    \PrimalDual{$E=\{e_1,\ldots,e_n\}, S_1,\ldots,S_m$}:\\
+    $y$ = [0] * $n$\\
+    I = []\\
+    \While{$\exists e_i \notin \bigcup\limits_{j\in I} S_j$}{
+        $l$ = \textbf{все} индексы, для которых $e_i \in S_l$ \textbf{и} $\e = (w_l-\sum\limits_{k:e_k\in S_l} y_k)$ \textbf{минимален}\\
+        $y_i$ += $\e$\\
+        \textbf{Добавить} в I все элементы $l$
+    }
+\end{algorithm}
 
 Итераций внешнего цикла \textbf{while} не более $n$ штук, так как каждый раз в I добавляем не менее одного элемента. Ясно (из раздела про двойственную задачу), что это корректный $f$-оптимальный алгоритм. \qed

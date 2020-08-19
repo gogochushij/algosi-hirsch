@@ -134,6 +134,22 @@ function FFA(`$\langle G=\langle V,E\rangle,c,s,t\rangle$`):
 			`$f(v,u)$` := `$-f(u,v)$`
 \end{lstlisting}
 
+\begin{algorithm}
+\SetKwFunction{FFA}{FFA}
+\FFA($\langle G=\langle V,E\rangle,c,s,t\rangle$):\\
+    \For{\textbf{each} $(u, v) \in E$}{
+        $f(u, v)$ := 0\\
+        $f(v, u)$ := 0\\
+    }
+    \While{$\exists\textrm{ путь }p\colon s\to t \textrm{ в } G_f$}{
+        $c_f(p)$ := $\min\{c_f(u,v)|(u,v)\in p\}$\\
+        \For{\textbf{each} $(u, v) \in p$}{
+            $f(u,v)$ += $c_f(p)$\\
+            $f(v,u)$ := $-f(u,v)$
+        }
+    }
+\end{algorithm}
+
 На практике, понятно, он возникает в основном только с целыми числами. Проблема этого алгортима в том, что не указано, как именно нужно искать увеличивающий путь. Если искать его неудачно\footnote{а еще если значения пропускных способностей иррациональные, пример можно найти в \href{https://en.wikipedia.org/wiki/Ford-Fulkerson_algorithm}{англоязычной википедии}}, то алгоритм может и зависнуть.
 
 \begin{comment}
