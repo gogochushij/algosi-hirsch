@@ -5,8 +5,7 @@
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{parskip}
 \usepackage{graphicx}
-\usepackage{listings} %нужно заменить листинги на algorithm2e
-\usepackage[ruled]{algorithm2e}
+\usepackage[ruled,linesnumbered,vlined]{algorithm2e}
 \usepackage{comment}
 \usepackage{hyperref}
 \usepackage{pgffor}
@@ -45,6 +44,7 @@
 \newtheorem{example}{Пример}[section]
 \newtheorem{problem}{Задача}[section]
 \newtheorem{lemma}{Лемма}[section]
+\newtheorem{corollary}{Следствие}[section]
 
 \newtheorem*{theorem*}{Теорема}
 \newtheorem*{definition*}{Определение}
@@ -81,7 +81,7 @@
 % Чтобы скомпилировать все, что есть, впишите:
 % \foreach \n \in {1,...,9,10,12,13,14,15,17,20,21} {\input{que\n.tex}} 
 % ВМЕСТО строки ниже
-\foreach \n in {1,...,9,10,12,13,14,15,17,20,21} {\input{que\n.tex}}
+\foreach \n in {1,...,15,17,20,21} {\input{que\n.tex}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % que6.tex ссылается на que5.tex

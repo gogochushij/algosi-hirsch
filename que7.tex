@@ -1,6 +1,6 @@
 \let\bf\bfseries
 \let\it\itshape
-\section{(7) (WIP)Транспортные сети. Задача о максимальном потоке. Разрез. Теорема о максимальном потоке и минимальном разрезе. Алгоритм Форда-Фалкерсона (\groth)}
+\section{(7) Транспортные сети. Задача о максимальном потоке. Разрез. Теорема о максимальном потоке и минимальном разрезе. Алгоритм Форда-Фалкерсона (\groth)}
 Фактически эта глава~--- просто пересказ параграфов из кормена в правильном порядке. Начнем, с того, что это вообще такое. Итак,
 \subsection{Транспортные сети. Задача о максимальном потоке}
 \begin{definition}
@@ -122,32 +122,28 @@
 
 Теперь мы умеем все доказывать, чтобы описать алгоритм из базовой идеи, который называется
 \subsection{Алгоритм Форда-Фалкерсона}
-\begin{lstlisting}[escapeinside=``]
-function FFA(`$\langle G=\langle V,E\rangle,c,s,t\rangle$`):
-	foreach `$(u,v)\in E$`:
-		`$f(u,v)$` := 0
-		`$f(v,u)$` := 0
-	while `$\exists p\colon s\to t \textrm{ in } G_f$`:
-		`$c_f(p)$` := `$\min\{c_f(u,v)|(u,v)\in p\}$`
-		foreach `$(u,v)\in p$`:
-			`$f(u,v)$` += `$c_f(p)$`
-			`$f(v,u)$` := `$-f(u,v)$`
-\end{lstlisting}
-
-\begin{algorithm}
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{}
+\SetKwFor{For}{for}{:}{}
+\SetKwFor{While}{while}{:}{}
+\SetKwFor{ForEach}{foreach}{:}{}
+\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{}
 \SetKwFunction{FFA}{FFA}
-\FFA($\langle G=\langle V,E\rangle,c,s,t\rangle$):\\
-    \For{\textbf{each} $(u, v) \in E$}{
-        $f(u, v)$ := 0\\
-        $f(v, u)$ := 0\\
+\SetKwProg{Fn}{}{:}{}
+\Fn{\FFA{$G=\langle V,E\rangle$,$c$,$s$,$t$}}{
+    \ForEach{$(u, v) \in E$}{
+        $f(u, v)$ := 0\;
+        $f(v, u)$ := 0\;
     }
-    \While{$\exists\textrm{ путь }p\colon s\to t \textrm{ в } G_f$}{
-        $c_f(p)$ := $\min\{c_f(u,v)|(u,v)\in p\}$\\
-        \For{\textbf{each} $(u, v) \in p$}{
-            $f(u,v)$ += $c_f(p)$\\
-            $f(v,u)$ := $-f(u,v)$
+    \While{$\exists p\colon s\to t,p\subseteq E_f$}{
+        $c_f(p)$ := $\min\{c_f(u,v)|(u,v)\in p\}$\;
+        \ForEach{$(u, v) \in p$}{
+            $f(u,v)$ += $c_f(p)$\;
+            $f(v,u)$ := $-f(u,v)$\;
         }
     }
+}
 \end{algorithm}
 
 На практике, понятно, он возникает в основном только с целыми числами. Проблема этого алгортима в том, что не указано, как именно нужно искать увеличивающий путь. Если искать его неудачно\footnote{а еще если значения пропускных способностей иррациональные, пример можно найти в \href{https://en.wikipedia.org/wiki/Ford-Fulkerson_algorithm}{англоязычной википедии}}, то алгоритм может и зависнуть.

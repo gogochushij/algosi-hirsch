@@ -1,6 +1,6 @@
 \let\bf\bfseries
 \let\it\itshape
-\section{(9) (WIP)Алгоритм проталкивания предпотока (\groth)}
+\section{(9) Алгоритм проталкивания предпотока (\groth)}
 Этот алгоритм также находит максимальный поток, но отличается от предыдущих описанных алгоритмов тем, что не является вариантом алгоитма Форда-Фалкерсона, а также другой оценкой времени работы~-- $O(|V|^2|E|)$.
 \begin{definition}
 	{\bf\it Предпотоком} называется функция $f\colon V\times V\to\mathbb{R}$ на вершинах транспортной сети $G=\langle V,E\rangle,s,t$, для которой выполняются следующие свойства:
@@ -29,14 +29,18 @@
 \subsection{Операция проталкивания}
 
 \begin{algorithm}
+\DontPrintSemicolon
+\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{}
 \SetKwFunction{Push}{Push}
-\Push{$(u, v) \in E$}:\\
-\If{$e(u) > 0$ \textbf{and} $c_f(u,v)>0$ \textbf{and} $h(u)-h(v)=1$}{
-    $d$ := $\min(e(u), c_f(u,v))$ \\
-    $f(u,v)$ += $d$\\
-	$f(v,u)$ := $-f(u, v)$\\
-	$e(u)$ -= `$d$`\\
-	$e(v)$ += `$d$`
+\SetKwProg{Fn}{}{:}{}
+\Fn{\Push{$(u, v) \in E$}}{
+	\If{$e(u) > 0$ \textbf{and} $c_f(u,v)>0$ \textbf{and} $h(u)-h(v)=1$}{
+		$d$ := $\min(e(u), c_f(u,v))$ \;
+		$f(u,v)$ += $d$\;
+		$f(v,u)$ := $-f(u, v)$\;
+		$e(u)$ --= `$d$`\;
+		$e(v)$ += `$d$`\;
+	}
 }
 \end{algorithm}
 Условие $h(u)-h(v)=1$ нужно, так как из отрицания пункта 3 условия на функцию высоты следует, что если высоты различаются больше чем на единицу, остаточных ребер просто нет, поэтому проталкивать что-либо бессмысленно.
@@ -52,13 +56,16 @@
 	Так как высоты не меняются, нужно только проверить, что сохраняется условие 3. Операция может удалить ребро $(u,v)$ из $E_f$ (если $c_f(u,v)<e(u)$) или добавить ребро $(v,u)$, если его не было (так как если $e(u)<c_f(u)$, то $c_{f_\mathrm{new}}(v,u)=c(v,u)+f_\mathrm{new}(u,v)>0=c_f(v,u)$). В первом случае удаление ребра делает неактуальным ограничение. Во втором случае выполняется $h(v)=h(u)+1$, поэтому $h(v)\le h(u)+1$. Поэтому $h$ остается функцией высоты.
 \end{proof}
 \subsection{Операция подъема}
-
 \begin{algorithm}
-\SetKwFunction{Relabel}{Relabel}
-\Relabel{$u\in V$}:\\
-\If{$e(u)>0$ \textbf{and} $\forall v\in \{x|(u,x)\in E_f\}\colon h(u)\le h(v)$}{
-	$h(u)$ += $1+\min_{(u,v)\in E_f}\{h(v)\}$
-}
+	\DontPrintSemicolon
+	\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{}
+	\SetKwFunction{Relabel}{Relabel}
+	\SetKwProg{Fn}{}{:}{}
+	\Fn{\Relabel{$u\in V$}}{
+		\If{$e(u)>0$ \textbf{and} $\forall v\in \{x|(u,x)\in E_f\}\colon h(u)\le h(v)$}{
+			$h(u)$ += $1+\min_{(u,v)\in E_f}\{h(v)\}$\;
+		}
+	}
 \end{algorithm}
 \begin{lemma}
 	После подъема функция высоты остается функцией высоты (не нарушаются ее свойства).
@@ -98,27 +105,29 @@ $$
 Понятно, что они не могут быть выполнены одновременно.
 
 Теперь мы можем написать алгоритм:
-\begin{lstlisting}[escapeinside=``]
-	function PPA(`$G,s,t$`):
-		init_preflow(`$G,s$`)
-		while `$\exists u\colon\left(\exists v\in V\colon\mathrm{Pushable}(u,v)\right)\wedge\mathrm{Relabelable}(u)$`:
-			if `$\mathrm{Pushable}(u,v)$`:
-				push(`$u,v$`)
-			else: relabel(`$u$`)
-\end{lstlisting}
 
-%\LinesNumbered
-%\begin{algorithm}[H]
-%	\caption{Вставьте текст}
-%	\SetKwFunction{PPA}{PPA}
-%	\SetKwFunction{IP}{init_preflow}
-%	\PPA{$G,s,t$}:\\
-%		\ip{}
-%	while `$\exists u\colon\left(\exists v\in V\colon\mathrm{Pushable}(u,v)\right)\wedge\mathrm{Relabelable}(u)$`:
-%	if `$\mathrm{Pushable}(u,v)$`:
-%	push(`$u,v$`)
-%	else: relabel(`$u$`)
-%\end{algorithm}
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{}
+	\SetKwFor{For}{for}{:}{}
+	\SetKwFor{While}{while}{:}{}
+	\SetKwFor{ForEach}{foreach}{:}{}
+	\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{}
+	\SetKwProg{Fn}{}{:}{}
+	\SetKwFunction{PPA}{PPA}
+	\SetKwFunction{initpreflow}{initialize-preflow}
+	\SetKwFunction{Push}{Push}
+	\SetKwFunction{Relabel}{Relabel}
+	\Fn{\PPA{$G=\langle V,E\rangle$,$c$,$s$,$t$}}{
+		\initpreflow{$G$,$s$}\;
+		\While{$\exists u\colon\left(\exists v\in V\colon\mathrm{Pushable}(u,v)\right)\vee\mathrm{Relabelable}(u)$}{
+			\uIf{$\mathrm{Pushable}((u,v))$}{
+				\Push{$(u,v)$}\;
+			}
+			\Else{\Relabel{$u$}}
+		}
+	}
+\end{algorithm}
 
 \begin{lemma}\label{someshit9}
 	$G=\langle V,E\rangle,s,t,f,h$~--- транспортная сеть с источником, стоком, предпотоком и функцией высоты. Тогда нет пути из источника в сток в $G_f$.
