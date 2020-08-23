@@ -112,7 +112,6 @@ $$
 	\SetKwFor{For}{for}{:}{}
 	\SetKwFor{While}{while}{:}{}
 	\SetKwFor{ForEach}{foreach}{:}{}
-	\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{}
 	\SetKwProg{Fn}{}{:}{}
 	\SetKwFunction{PPA}{PPA}
 	\SetKwFunction{initpreflow}{initialize-preflow}
@@ -141,7 +140,7 @@ $$
 	После окончания работы алгоритма $f$ становится максимальным потоком.
 \end{theorem}
 \begin{proof}
-	Понятно, что $f$, инициализированный в initialize\_preflow, является предпотоком.
+	Понятно, что $f$, инициализированный в \texttt{initialize\_preflow}, является предпотоком.
 	
 	В процессе выполнения алгоритма производятся операции проталкивания и поднятия, которые, как мы уже знаем, оставляют $f$ и $h$ предпотоком и функцией высоты.
 	

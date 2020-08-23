@@ -13,27 +13,29 @@
 Соответствующий псевдокод:
 
 \begin{algorithm}[H]
-\SetKwFunction{PrefixSum}{PrefixSum}
-\SetKw{Parallel}{parallel}
-\SetKw{Random}{random}
-
-\PrefixSum{$\&A[0..n-1]$}:\\
-\If{$n>1$}{
-    B = [0] * ($\frac{n}{2}-1$) \\
-    \Parallel \For{$i = 0..(\frac{n}{2}-1$}
-    {
-        B[$i$] = A[$2i$] + A[$2i+1$]
-    }
-    \PrefixSum{\textup{B}}
-    \\$ $\\
-    \Parallel \For{$i = 0..(n-1)$}{
-        \eIf{$i>0$}{
-            A[$i$] = B[$\frac{i}{2}-1$] + A[$i$]\\
-        }{
-            A[$i$] = B[$\frac{i-1}{2}$]
-        }
-    }
-}
+	\DontPrintSemicolon
+	\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{}
+	\SetKwFor{For}{for}{:}{}
+	\SetKwProg{Fn}{}{:}{}
+	\SetKwFunction{PrefixSum}{PrefixSum}
+	\SetKw{Parallel}{parallel}
+	\SetKw{Random}{random}
+	\Fn{\PrefixSum{$\&A[0..n-1]$}}{
+		\If{$n>1$}{
+			B = $[0]*\left(\frac{n}{2}-1\right)$ \\
+			\Parallel \For{$i = 0\ldots\left(\frac{n}{2}-1\right)$}{
+				B$[i]$ = A$[2i]$ + A$[2i+1]$\;
+			}\;
+			\PrefixSum{\textup{B}}\;\;
+			\Parallel \For{$i = 0\ldots(n-1)$}{
+				\eIf{$i>0$}{
+					A$[i]$ = B$\left[\frac{i}{2}-1\right]$ + A$[i]$\;
+				}{
+					A$[i]$ = B$\left[\frac{i-1}{2}\right]$\;
+				}
+			}
+		}
+	}
 \end{algorithm}
 
 Время работы оценивается просто: из кода следует соотношение $T(n) = T(n/2) + C$, и далее можно написать $= T(n/4) + 2C = T(n/8) + 3C = \ldots = C\cdot\log n = O(\log n)$. Общая работа: $W(n) = W(n/2) + O(n)$, откуда по мастер-теореме $W(n) = O(n)$. По принципу Брента количество процессоров можно взять $P(n) = \frac{W(n)}{T(n)} = O(\frac{n}{\log n})$. \qed
