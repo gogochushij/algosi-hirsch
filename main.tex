@@ -14,6 +14,13 @@
 \usepackage[top=2.5cm, left=3cm, right=3cm, bottom=3.0cm]{geometry}
 % Colour table cells
 \usepackage[table]{xcolor}
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+\definecolor{pigmentblue}{rgb}{0.2, 0.2, 0.6}
+\hypersetup{ %use colored text instead of ugly boxes
+	colorlinks,
+	linkcolor={cadmiumgreen},
+	urlcolor={pigmentblue}
+}
 
 \usepackage{tikz}
 
@@ -65,13 +72,6 @@
 \begin{document}
 
 \maketitle
-
-%\lstset{%
-%emph={%  
-%    if, for, parallel, else, function, to, while, such, that, and, is%
-%    },
-%    emphstyle={\bfseries},%
-%}%
 
 \input{prologue.tex}
 \tableofcontents \newpage
