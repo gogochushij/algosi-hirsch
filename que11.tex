@@ -21,7 +21,7 @@
 	
 	Пусть $M$~-- база минимального веса, содержащая $A\cup\{(u,v)\}$, $M'$~-- другая база минимального веса, содержащая $A$. Если она не содержит $(u,v)$, то она содержит какое-то другое ребро $(x,y)$, пересекающее разрез, но тогда $w(M')=w(M)-w((u,v))+w((x,y))\ge w(M)$. Но также $w(M')\le w(M)\Rightarrow w(M')=w(M)$.
 \end{proof}
-\begin{corollary}
+\begin{corollary}\label{cor}
 	$G=\langle V,E\rangle,w$~--- неориентированный взвешенный связный граф. $A\subseteq E$~-- независимое множество в его цикловом матроиде. $C=\langle V_C,E_C\rangle$~-- компонента связности леса $G_A=\langle V,A\rangle$. Если $(u,v)$~-- легкое ребро, которое соединяет $C$ с другой компонентой связности, то $A\cup\{u,v\}$~--- подмножество базы минимального веса, содержащего $A$.
 \end{corollary}
 \begin{proof}
@@ -33,15 +33,39 @@
 
 
 \subsection{Алгоритм Прима}
-Это тоже вариант жадного алгоритма. Он похож на алгоритм Дийкстры, в частности, использует {\it очередь с приоритетами} (она была у Охотина в  \href{https://users.math-cs.spbu.ru/~okhotin/teaching/algorithms_2019/okhotin_algorithms_2019_l4.pdf}{лекции 4}, а описание реализации с помощью кучи в \href{https://users.math-cs.spbu.ru/~okhotin/teaching/algorithms_2019/okhotin_algorithms_2019_l5.pdf}{лекции 5}).
+Это тоже вариант жадного алгоритма. Он похож на алгоритм Дийкстры, в частности, использует {\it очередь с приоритетами} (min-heap, она была у Охотина в  \href{https://users.math-cs.spbu.ru/~okhotin/teaching/algorithms_2019/okhotin_algorithms_2019_l4.pdf}{лекции 4}, а описание реализации с помощью кучи в \href{https://users.math-cs.spbu.ru/~okhotin/teaching/algorithms_2019/okhotin_algorithms_2019_l5.pdf}{лекции 5}).
 
-Этот алгоритм находит остовное дерево, сторя его из корня $r\in V$.
+Этот алгоритм находит остовное дерево, сторя его из корня $r\in V$. К каждой вершине $u\in V$ добавим два атрибута: key~-- длина наименьшего ребра, которым эту вершину можно соединить с остовным деревом и $\pi$~-- вершина из дерева, с которой $u$ соединена ребром, описанным в атрибуте key. По атрибуту key устанавливается приоритет вершины в очереди $Q$.
+
+\newcommand{\nil}{\scshape nil}
 \begin{algorithm}
 	\DontPrintSemicolon
 	\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{end}
+	\SetKwFor{While}{while}{:}{}
+	\SetKwFor{ForEach}{foreach}{:}{}
 	\SetKwFunction{PrimMST}{Prim-MST}
+	\SetKwFunction{extractmin}{extract-min}
+	\SetKwFunction{decreasekey}{decrease-key}
+	\SetKwFunction{queue}{Queue}
 	\SetKwProg{Fn}{def}{:}{end}
-	\Fn{\PrimMST{$G=\langle V,E\rangle,w,r\in V$}}{
-
+	\Fn{\PrimMST{$G=\langle V,E\rangle$, $w$, $r\in V$}}{
+		\ForEach{$u\in V$}{\label{alg-prim:init-begin}
+			$u$.key = $\infty$\;
+			$u$.$\pi$ = \nil\;
+		}
+		$r$.key = $0$\;
+		$Q$ = \queue{$V$}\;\label{alg-prim:init-end}
+		\While{$Q\ne\varnothing$}{
+			$u$ = \extractmin{$Q$}\;
+			\ForEach{$v\in\{x|(u,x)\in E\}$}{
+				\If{$v\in Q$ {\normalfont\bfseries and} $w(u,v)<v$.{\normalfont key}}{
+					$v$.$\pi$ = $u$\;
+					$v$.\decreasekey{$w(u,v)$}\;
+				}
+			}
+		}
 	}
 \end{algorithm}
+Алгоритм неявно строит независимое множество $A$ в виде $A=\{(v,v.\pi)|v\in V\smallsetminus\left(Q\cup\{r\}\right)\}$. Разрезом тут является пара $(Q,V\smallsetminus Q)$, добавляются только легкие ребра, поэтому (из следствия~\ref{cor}) алгоритм корректен.
+
+Оценка времени зависит от варианта реализации очереди с приоритетами. При использовании двоичной кучи строки \ref{alg-prim:init-begin}-\ref{alg-prim:init-end} выполняются за время $O(|V|)$. Цикл {\tt\bf while} выполняется $O(|V|)$ раз. Операция \texttt{extract-min} выполняется за $O(\log |V|)$  раз, а внутренний цикл {\tt\bf foreach} всего выполняется $O(|E|)$ раз (так как общая длина всех списков смежности $2|E|$: каждую ребро посчитано дважды). Операция \texttt{decrease-key} реализуется за $O(\log|V|)$, поэтому общее время работы $O(|V|+|V|\log|V|+|E|\log|V|)=O(|E|\log|V|)$.

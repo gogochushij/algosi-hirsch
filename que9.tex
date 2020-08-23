@@ -34,7 +34,7 @@
 \SetKwFunction{Push}{Push}
 \SetKwProg{Fn}{}{:}{}
 \Fn{\Push{$(u, v) \in E$}}{
-	\If{$e(u) > 0$ \textbf{and} $c_f(u,v)>0$ \textbf{and} $h(u)-h(v)=1$}{
+	\If{$e(u) > 0$ {\normalfont\bf and} $c_f(u,v)>0$ {\normalfont\bf and} $h(u)-h(v)=1$}{
 		$d$ := $\min(e(u), c_f(u,v))$ \;
 		$f(u,v)$ += $d$\;
 		$f(v,u)$ := $-f(u, v)$\;
@@ -62,7 +62,7 @@
 	\SetKwFunction{Relabel}{Relabel}
 	\SetKwProg{Fn}{}{:}{}
 	\Fn{\Relabel{$u\in V$}}{
-		\If{$e(u)>0$ \textbf{and} $\forall v\in \{x|(u,x)\in E_f\}\colon h(u)\le h(v)$}{
+		\If{$e(u)>0$ {\normalfont\bf and} $\forall v\in \{x|(u,x)\in E_f\}\colon h(u)\le h(v)$}{
 			$h(u)$ += $1+\min_{(u,v)\in E_f}\{h(v)\}$\;
 		}
 	}
@@ -88,8 +88,8 @@ $$
 Начальная высота определяется так:
 $$
 h(u)=\begin{cases}
-|V|, & u=s,\\
-0, & \mathrm{otherwise}
+	|V|, & u=s,\\
+	0, & \mathrm{otherwise}
 \end{cases}
 $$
 Это действительно корректно определенная функция высоты, поскольку единственные ребра, для которых не выполняется условие 3~-- это ребра, выходящие из источника, но так как для них значение предпотока равно значению пропускной способности, их нет в $E_f$.
