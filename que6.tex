@@ -8,20 +8,29 @@
 
 Вот вполне интуитивный <<жадник>>:
 
-\begin{lstlisting}[escapeinside=``]
-function Greedy (`$E = [e_1, \ldots, e_n]$`, `$S = [S_1, \ldots, S_m]$`, `$w = [w_1, \ldots, w_m]$`):
-I = []
-`$\hat{S_1}, \ldots , \hat{S_m}$` `$= S_1, \ldots, S_m$`
-while I is not a set cover:
-    `$l$` `$=$` any index j such that `$\hat{S_j} \neq \emptyset $` and `$\frac{w_j}{|\hat{S_j}|}$` is minimal
-    I.append(`$l$`)
-    for `$j$`=1..m:
-        `$\hat{S_j} = \hat{S_j}\smallsetminus S_l$`
-\end{lstlisting}
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\SetKwFor{For}{for}{:}{}
+	\SetKwFor{While}{while}{:}{}
+	\SetKwProg{Fn}{}{:}{}
+	\SetKwFunction{Greedy}{Greedy}
+	\SetKwFunction{append}{append}
+	\Fn{\Greedy{$E=[e_1,\ldots,e_n]$,$S=[S_1,\ldots,S_m]$,$w=[w_1,\ldots,w_m]$}}{
+		$I=[]$\;
+		$\hat{S}_1,\ldots,\hat{S}_m=S_1,\ldots,S_m$\;
+		\While{$\bigcup I \neq  E$}{
+			$l=$ любой индекс $j$ т.ч. $\hat{S}_j \neq \varnothing$ и $\frac{w_j}{|\hat{S}_j|}$ минимально\;
+			Добавить $l$ в $I$\;
+			\For{$j=1\ldots m$}{
+				$\hat{S}_j = \hat{S}_j\smallsetminus S_l$\;
+			}
+		}
+	}
+\end{algorithm}
 
 Ясно, что этот алгоритм действительно дает покрытие всего $E$. Нужно доказать точность.
 
-\underline{Доказываем $H_n$-оптимальность.} Пусть алгоритм сделал $l$ итераций. За $n_k$ обозначим количество непокрытых элементов $E$ перед $k$-той итерацией (полагаем по определению $n_{l+1}=0$). Так, $n = n_1 > \ldots > n_{l+1} = 0$. 
+\underline{Доказываем $H_n$-оптимальность.} Пусть алгоритм сделал $l$ итераций. За $n_k$ обозначим количество непокрытых элементов $E$ перед $k$-той итерацией (полагаем по определению $n_{l+1}=0$). Так, $n = n_1 > \ldots > n_{l+1} = 0$.
 
 \textbf{Пока поверим}, что если на $k$-той итерации выбрано множество $S_i$, то справедливо неравенство:
 

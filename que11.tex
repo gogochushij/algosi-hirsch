@@ -1,0 +1,102 @@
+\let\bf\bfseries
+\let\it\itshape
+\section{(11) Алгоритмы Прима и Крускала для задачи о минимальном остовном дереве (\groth)}
+\begin{definition}
+	Для связного графа $G=\langle V,E\rangle$ {\bf остовным деревом} называется подграф $G'=\langle V,E'\rangle,E'\subseteq E$, который является деревом.
+\end{definition}
+\begin{problem}
+	В связном взвешенном неориентированном графе $G=\langle V,E\rangle$ с весовой функцией $w\colon E\to\mathbb{R}$ найти остовное дерево минимального веса.
+\end{problem}
+Вспомним, что подмножества ребер графа, в которых нет циклов, являются независимыми в {\it цикловом матроиде}. Наша задача превращается в поиск базы минимального веса, для которого можно использовать {\it жадный алгоритм}\footnote{в курсе комбинаторики был поиск множества максимального веса, но это, по большому счету, одно и то же, потому что можно инвертировать все веса}: начиная с пустого множества последовательно добавляем ребра минимального веса, пока можем.
+
+Алгоритмы Прима и Крускала являются реализациями этого подхода. Остается только научиться быстро находить ребро минимального веса, который можно добавить, чтобы множество осталось независимым.
+\begin{definition}
+	{\bf\it Разрезом} графа $G=\langle V,E\rangle$ называется пара $(S,T),S,T\subseteq V$, что $V=S\sqcup T$. Ребро называется {\bf\it пересекающим разрез}, если концы ребра находятся в разных множествах разреза. Разрез называется {\bf\it согласованным} со множеством $A$, если никакое ребро из $A$ не пересекает разрез. Ребро называется {\bf легким}, если оно пересекает разрез и имеет минимальный вес среди всех таких ребер, пересекающих разрез.
+\end{definition}
+\begin{theorem}
+	В графе $G=\langle V,E\rangle$ с весовой функцией $w$ $A\subseteq E$~-- независимое подмножество, согласованое с разрезом $(S,T)$, ребро $(u,v)$~-- легкое. Тогда $A\cup\{(u,v)\}$~-- подмножество базы минимального веса, содержащего $A$.
+\end{theorem}
+\begin{proof}
+	Понятно, что множество будет независимым: если это нет так, то еще какое-то ребро пересекает разрез.
+
+	Пусть $M$~-- база минимального веса, содержащая $A\cup\{(u,v)\}$, $M'$~-- другая база минимального веса, содержащая $A$. Если она не содержит $(u,v)$, то она содержит какое-то другое ребро $(x,y)$, пересекающее разрез, но тогда $w(M')=w(M)-w((u,v))+w((x,y))\ge w(M)$. Но также $w(M')\le w(M)\Rightarrow w(M')=w(M)$.
+\end{proof}
+\begin{corollary}\label{cor}
+	$G=\langle V,E\rangle,w$~--- неориентированный взвешенный связный граф. $A\subseteq E$~-- независимое множество в его цикловом матроиде. $C=\langle V_C,E_C\rangle$~-- компонента связности леса $G_A=\langle V,A\rangle$. Если $(u,v)$~-- легкое ребро, которое соединяет $C$ с другой компонентой связности, то $A\cup\{u,v\}$~--- подмножество базы минимального веса, содержащего $A$.
+\end{corollary}
+\begin{proof}
+	Разрез $(V_C,V\smallsetminus V_C)$ согласован с $A$ и $(u,v)$ его пересекает.
+\end{proof}
+\subsection{(WIP) Алгоритм Крускала}
+Этот алгоритм использует структуру данных, которая называется
+\subsubsection{Система непересекающихся множеств}
+Эта структура поддерживает $S$ и множество множеств $\{S_1,\ldots,S_k\},S_i\cap S_j=\varnothing,\bigcup S_i=S$. У каждого множества есть представитель $r_i\in S_i$. Кроме того, поддерживаются 3 операции:
+\begin{itemize}
+	\item[{\tt Make-Set}$(x\not\in S)$] создает новое множество $S_{k+1}=\{x\}$.
+	\item[{\tt Union}$(x,y\in S)$] объединяет два множества $S_x$ и $S_y$, содержащих элементы $x$ и $y$. Представителем выбирается любой элемент из $S_x\cup S_y$.
+	\item[{\tt Find-Set}$(x\in S)$] возвращает представитель множества, которое содержит элемент $x$.
+\end{itemize}
+Можно просто реализовать СНМ с помощью связных списков: каждое несвязное множество состоит из своего списка. Каждый элемент ссылается на первый элемент списка, который и является его представителем. В этом случае операции {\tt Make-Set} и {\tt Find-Set} реализуются за время $O(1)$.
+\subsubsection{Сам алгоритм}
+\begin{algorithm}
+	\DontPrintSemicolon
+	\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{end}
+	\SetKwFor{ForEach}{foreach}{:}{}
+	\SetKwFunction{KruskalMST}{Kruskal-MST}
+	\SetKwFunction{makeset}{Make-Set}
+	\SetKwFunction{find}{Find}
+	\SetKwFunction{union}{Union}
+	\SetKwFunction{sort}{Sort}
+	\SetKwProg{Fn}{def}{:}{end}
+	\Fn{\KruskalMST{$G=\langle V,E\rangle$, $w$}}{
+		$A=\varnothing$\;
+		\ForEach{$u\in V$}{
+			\makeset{$u$}\;
+		}
+		\sort{$E$, $\lambda x\lambda y.[w(x)<w(y)]$}\;
+		\ForEach{$(u,v)\in E$}{
+			\If{\find{$u$} $\ne$ \find{$v$}}{
+				$A$ := $A\cup\{(u,v)\}$\;
+				\union{$(u,v)$}\;
+			}
+		}
+	}
+\end{algorithm}
+Это прямо в буквальном смысле реализация жадного алгоритма, поэтому его корректность очевидна.
+\subsection{Алгоритм Прима}
+Это тоже вариант жадного алгоритма. Он похож на алгоритм Дийкстры, в частности, использует {\it очередь с приоритетами} (min-heap, она была у Охотина в  \href{https://users.math-cs.spbu.ru/~okhotin/teaching/algorithms_2019/okhotin_algorithms_2019_l4.pdf}{лекции 4}, а описание реализации с помощью кучи в \href{https://users.math-cs.spbu.ru/~okhotin/teaching/algorithms_2019/okhotin_algorithms_2019_l5.pdf}{лекции 5}).
+
+Этот алгоритм находит остовное дерево, сторя его из корня $r\in V$. К каждой вершине $u\in V$ добавим два атрибута: key~-- длина наименьшего ребра, которым эту вершину можно соединить с остовным деревом и $\pi$~-- вершина из дерева, с которой $u$ соединена ребром, описанным в атрибуте key. По атрибуту key устанавливается приоритет вершины в очереди $Q$.
+
+\newcommand{\nil}{\scshape nil}
+\begin{algorithm}
+	\DontPrintSemicolon
+	\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{end}
+	\SetKwFor{While}{while}{:}{}
+	\SetKwFor{ForEach}{foreach}{:}{}
+	\SetKwFunction{PrimMST}{Prim-MST}
+	\SetKwFunction{extractmin}{extract-min}
+	\SetKwFunction{decreasekey}{decrease-key}
+	\SetKwFunction{queue}{Queue}
+	\SetKwProg{Fn}{def}{:}{end}
+	\Fn{\PrimMST{$G=\langle V,E\rangle$, $w$, $r\in V$}}{
+		\ForEach{$u\in V$}{\label{alg-prim:init-begin}
+			$u$.key := $\infty$\;
+			$u$.$\pi$ := \nil\;
+		}
+		$r$.key := $0$\;
+		$Q$ := \queue{$V$}\;\label{alg-prim:init-end}
+		\While{$Q\ne\varnothing$}{
+			$u$ := \extractmin{$Q$}\;
+			\ForEach{$v\in\{x|(u,x)\in E\}$}{
+				\If{$v\in Q$ {\normalfont\bfseries and} $w(u,v)<v$.{\normalfont key}}{
+					$v$.$\pi$ := $u$\;
+					$v$.\decreasekey{$w(u,v)$}\;
+				}
+			}
+		}
+	}
+\end{algorithm}
+Алгоритм неявно строит независимое множество $A$ в виде $A=\{(v,v.\pi)|v\in V\smallsetminus\left(Q\cup\{r\}\right)\}$. Разрезом тут является пара $(Q,V\smallsetminus Q)$, добавляются только легкие ребра, поэтому (из следствия~\ref{cor}) алгоритм корректен.
+
+Оценка времени зависит от варианта реализации очереди с приоритетами. При использовании двоичной кучи строки \ref{alg-prim:init-begin}-\ref{alg-prim:init-end} выполняются за время $O(|V|)$. Цикл {\tt\bf while} выполняется $O(|V|)$ раз. Операция \texttt{extract-min} выполняется за $O(\log |V|)$  раз, а внутренний цикл {\tt\bf foreach} всего выполняется $O(|E|)$ раз (так как общая длина всех списков смежности $2|E|$: каждую ребро посчитано дважды). Операция \texttt{decrease-key} реализуется за $O(\log|V|)$, поэтому общее время работы $O(|V|+|V|\log|V|+|E|\log|V|)=O(|E|\log|V|)$.

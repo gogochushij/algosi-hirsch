@@ -5,8 +5,7 @@
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{parskip}
 \usepackage{graphicx}
-\usepackage{listings} %нужно заменить листинги на algorithm2e
-\usepackage[ruled]{algorithm2e}
+\usepackage[ruled,linesnumbered,vlined]{algorithm2e}
 \usepackage{comment}
 \usepackage{hyperref}
 \usepackage{pgffor}
@@ -15,6 +14,13 @@
 \usepackage[top=2.5cm, left=3cm, right=3cm, bottom=3.0cm]{geometry}
 % Colour table cells
 \usepackage[table]{xcolor}
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+\definecolor{pigmentblue}{rgb}{0.2, 0.2, 0.6}
+\hypersetup{ %use colored text instead of ugly boxes
+	colorlinks,
+	linkcolor={cadmiumgreen},
+	urlcolor={pigmentblue}
+}
 
 \usepackage{tikz}
 
@@ -45,6 +51,7 @@
 \newtheorem{example}{Пример}[section]
 \newtheorem{problem}{Задача}[section]
 \newtheorem{lemma}{Лемма}[section]
+\newtheorem{corollary}{Следствие}[section]
 
 \newtheorem*{theorem*}{Теорема}
 \newtheorem*{definition*}{Определение}
@@ -66,13 +73,6 @@
 
 \maketitle
 
-%\lstset{%
-%emph={%  
-%    if, for, parallel, else, function, to, while, such, that, and, is%
-%    },
-%    emphstyle={\bfseries},%
-%}%
-
 \input{prologue.tex}
 \tableofcontents \newpage
 
@@ -81,7 +81,7 @@
 % Чтобы скомпилировать все, что есть, впишите:
 % \foreach \n \in {1,...,9,10,12,13,14,15,17,20,21} {\input{que\n.tex}} 
 % ВМЕСТО строки ниже
-\foreach \n in {1,...,9,10,12,13,14,15,17,20,21} {\input{que\n.tex}}
+\foreach \n in {1,...,15,17,20,21} {\input{que\n.tex}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % que6.tex ссылается на que5.tex
