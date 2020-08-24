@@ -18,9 +18,9 @@
 	\Fn{\Greedy{$E=[e_1,\ldots,e_n]$,$S=[S_1,\ldots,S_m]$,$w=[w_1,\ldots,w_m]$}}{
 		$I=[]$\;
 		$\hat{S}_1,\ldots,\hat{S}_m=S_1,\ldots,S_m$\;
-		\While{I is not a set cover}{
-			$l=$ any index j such that $\hat{S}_j \neq \varnothing$ and $\frac{w_j}{|\hat{S}_j|}$ is minimal\;
-			I.\append{$l$}\;
+		\While{$\bigcup I \neq  E$}{
+			$l=$ любой индекс $j$ т.ч. $\hat{S}_j \neq \varnothing$ и $\frac{w_j}{|\hat{S}_j|}$ минимально\;
+			Добавить $l$ в $I$\;
 			\For{$j=1\ldots m$}{
 				$\hat{S}_j = \hat{S}_j\smallsetminus S_l$\;
 			}
