@@ -1,9 +1,8 @@
-\documentclass{article}
+\documentclass[a4paper]{article}
 
 \usepackage[english, russian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{parskip}
 \usepackage{graphicx}
 \usepackage[ruled,linesnumbered,vlined]{algorithm2e}
 \usepackage{comment}
@@ -24,15 +23,9 @@
 
 \usepackage{tikz}
 
-% Get larger line spacing in table
-\newcommand{\tablespace}{\\[1.25mm]}
-\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % = `top' strut
-\newcommand\tstrut{\rule{0pt}{2.0ex}}         % = `top' strut
-\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
-
 % My commands
-\newcommand{\statement}[2] {\textit{\textbf{#1} #2}}
-\newcommand{\e} {\varepsilon}
+\newcommand{\statement}[2]{\textit{\textbf{#1} #2}}
+\newcommand{\e}{\varepsilon}
 \newcommand{\needpicture} {
     {
         \begin{center}
@@ -79,7 +72,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Здесь настроить конспект для компиляции
 % Чтобы скомпилировать все, что есть, впишите:
-% \foreach \n \in {1,...,9,10,12,13,14,15,17,20,21} {\input{que\n.tex}} 
+% \foreach \n \in {1,...,9,10,12,13,14,15,17,20,21} {\input{que\n.tex}}
 % ВМЕСТО строки ниже
 \foreach \n in {1,...,15,17,20,21} {\input{que\n.tex}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
