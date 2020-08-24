@@ -27,11 +27,42 @@
 \begin{proof}
 	Разрез $(V_C,V\smallsetminus V_C)$ согласован с $A$ и $(u,v)$ его пересекает.
 \end{proof}
-\subsection{Алгоритм Крускала}
+\subsection{(WIP) Алгоритм Крускала}
 Этот алгоритм использует структуру данных, которая называется
 \subsubsection{Система непересекающихся множеств}
-
-
+Эта структура поддерживает $S$ и множество множеств $\{S_1,\ldots,S_k\},S_i\cap S_j=\varnothing,\bigcup S_i=S$. У каждого множества есть представитель $r_i\in S_i$. Кроме того, поддерживаются 3 операции:
+\begin{itemize}
+	\item[{\tt Make-Set}$(x\not\in S)$] создает новое множество $S_{k+1}=\{x\}$.
+	\item[{\tt Union}$(x,y\in S)$] объединяет два множества $S_x$ и $S_y$, содержащих элементы $x$ и $y$. Представителем выбирается любой элемент из $S_x\cup S_y$.
+	\item[{\tt Find-Set}$(x\in S)$] возвращает представитель множества, которое содержит элемент $x$.
+\end{itemize}
+Можно просто реализовать СНМ с помощью связных списков: каждое несвязное множество состоит из своего списка. Каждый элемент ссылается на первый элемент списка, который и является его представителем. В этом случае операции {\tt Make-Set} и {\tt Find-Set} реализуются за время $O(1)$.
+\subsubsection{Сам алгоритм}
+\begin{algorithm}
+	\DontPrintSemicolon
+	\SetKwIF{If}{ElseIf}{Else}{if}{:}{elif}{else}{end}
+	\SetKwFor{ForEach}{foreach}{:}{}
+	\SetKwFunction{KruskalMST}{Kruskal-MST}
+	\SetKwFunction{makeset}{Make-Set}
+	\SetKwFunction{find}{Find}
+	\SetKwFunction{union}{Union}
+	\SetKwFunction{sort}{Sort}
+	\SetKwProg{Fn}{def}{:}{end}
+	\Fn{\KruskalMST{$G=\langle V,E\rangle$, $w$}}{
+		$A=\varnothing$\;
+		\ForEach{$u\in V$}{
+			\makeset{$u$}\;
+		}
+		\sort{$E$, $\lambda x\lambda y.[w(x)<w(y)]$}\;
+		\ForEach{$(u,v)\in E$}{
+			\If{\find{$u$} $\ne$ \find{$v$}}{
+				$A$ := $A\cup\{(u,v)\}$\;
+				\union{$(u,v)$}\;
+			}
+		}
+	}
+\end{algorithm}
+Это прямо в буквальном смысле реализация жадного алгоритма, поэтому его корректность очевидна.
 \subsection{Алгоритм Прима}
 Это тоже вариант жадного алгоритма. Он похож на алгоритм Дийкстры, в частности, использует {\it очередь с приоритетами} (min-heap, она была у Охотина в  \href{https://users.math-cs.spbu.ru/~okhotin/teaching/algorithms_2019/okhotin_algorithms_2019_l4.pdf}{лекции 4}, а описание реализации с помощью кучи в \href{https://users.math-cs.spbu.ru/~okhotin/teaching/algorithms_2019/okhotin_algorithms_2019_l5.pdf}{лекции 5}).
 
@@ -50,16 +81,16 @@
 	\SetKwProg{Fn}{def}{:}{end}
 	\Fn{\PrimMST{$G=\langle V,E\rangle$, $w$, $r\in V$}}{
 		\ForEach{$u\in V$}{\label{alg-prim:init-begin}
-			$u$.key = $\infty$\;
-			$u$.$\pi$ = \nil\;
+			$u$.key := $\infty$\;
+			$u$.$\pi$ := \nil\;
 		}
-		$r$.key = $0$\;
-		$Q$ = \queue{$V$}\;\label{alg-prim:init-end}
+		$r$.key := $0$\;
+		$Q$ := \queue{$V$}\;\label{alg-prim:init-end}
 		\While{$Q\ne\varnothing$}{
-			$u$ = \extractmin{$Q$}\;
+			$u$ := \extractmin{$Q$}\;
 			\ForEach{$v\in\{x|(u,x)\in E\}$}{
 				\If{$v\in Q$ {\normalfont\bfseries and} $w(u,v)<v$.{\normalfont key}}{
-					$v$.$\pi$ = $u$\;
+					$v$.$\pi$ := $u$\;
 					$v$.\decreasekey{$w(u,v)$}\;
 				}
 			}
