@@ -4,96 +4,93 @@
 \subsection{Теоретико-числовые основания}
 Под $\equiv_p$ имеется в виду <<сравнимо по модулю $p$>>.
 \begin{definition*}[Символ Лежандра] Пусть $p$ -- простое число.
-$$(\frac{a}{p}) = \begin{cases} 
+$$\left(\frac{a}{p}\right) = \begin{cases}
 1,  & \exists x\in\mathbb{Z}_p^*: x^2\equiv_p a \; (a \text{~-- квадратичный вычет в } \mathbb Z_p)\\
 0,  & a\equiv_p0 \; (a \text{ и } p \text{ не взаимно просты})\\
 -1, & \text{иначе } (a \text{~-- квадратичный невычет в } \mathbb Z_p)
-\end{cases},$$
+\end{cases}$$
 \end{definition*}
 
 \begin{definition*}[Символ Якоби] Пусть $n = \prod_i p_i$ (среди $p_i$ могут быть равные).
-$$(\frac{a}{n})=\prod_i (\frac{a}{p_i})$$
+$$\left(\frac{a}{n}\right)=\prod_i \left(\frac{a}{p_i}\right)$$
 \end{definition*}
 
 Несколько свойств, которые нам понадобятся.
 
 \begin{lemma} \hypertarget{aequivb}{}
-Пусть $p$ простое. Если $a \equiv_p b$, то $(\frac{a}{p}) = (\frac{b}{p})$.
+Пусть $p$ простое. Если $a \equiv_p b$, то $\left(\frac{a}{p}\right) = \left(\frac{b}{p}\right)$.
 \end{lemma}
 \begin{proof}
 Тривиально из определения.
 \end{proof}
 
-\begin{lemma} \hypertarget{qresiduelemma}{} Квадратичных вычетов в $\mathbb Z_p$ ровно $\frac{p-1}{2}$ штук.
+\begin{lemma}\label{qresiduelemma} Квадратичных вычетов в $\mathbb Z_p$ ровно $\frac{p-1}{2}$ штук.
 \end{lemma}
 \begin{proof}
 Все квадратичные вычеты в $\mathbb Z_p$ есть в точности все ненулевые образы отображения $x \mapsto x^2$. Это отображение для каждого ненулевого $y$ склеивает числа $y$ и $-y$ (и только их) в $y^2$. Получается, что всего различных образов этого отображения $\frac{p-1}{2}$.
 \end{proof}
 
-\begin{theorem}[Критерий Эйлера] \hypertarget{euler}{} Пусть $p$ простое, тогда $(\frac{a}{p})\equiv_pa^{\frac{p-1}{2}}$
+\begin{theorem}[Критерий Эйлера] \hypertarget{euler}{} Пусть $p$ простое, тогда $\left(\frac{a}{p}\right)\equiv_pa^{\frac{p-1}{2}}$.
 \end{theorem}
 \begin{proof}
 Если $a\equiv_p 0$, то все понятно: и слева, и справа нули.
+\begin{enumerate}
+	\item Пусть $\left(\frac{a}{p}\right)=1$, здесь $a^{(\frac{p-1}{2})}\equiv_p \left(x^2\right)^{\left(\frac{p-1}{2}\right)}\equiv_p {x^{p-1}\equiv_p 1}$.
+	\item Пусть теперь $\left(\frac{a}{p}\right)=-1$, посмотрим на $f(x)=x^{\frac{p-1}{2}}-1$. Степень многочлена - $\frac{p-1}{2}$, и мы знаем что квадратичные вычеты~-- его корни. Из сказанного и леммы~\ref{qresiduelemma} заключаем, что других корней у $f$ нет.
 
-1. Пусть $(\frac{a}{p})=1$, здесь $a^{(\frac{p-1}{2})}\equiv_p (x^2)^{(\frac{p-1}{2})}\equiv_p {x^{p-1}\equiv_p 1}$.
-
-2. Пусть теперь $(\frac{a}{p})=-1$, посмотрим на $f(x)=x^{\frac{p-1}{2}}-1$. Степень многочлена - $\frac{p-1}{2}$, и мы знаем что квадратичные вычеты~-- его корни. Из сказанного и \hyperlink{qresiduelemma}{леммы 1.2} заключаем, что других корней у $f$ нет. 
-
-Значит невычеты~-- не корни, в частности, $f(a) \neq 0$. Но $x^{p-1}\equiv_p 1$, а значит $x^{\frac{p-1}{2}}\equiv_p \pm1$. Имеем $f(x) \equiv_p \pm1 - 1$, а из $f(a) \neq 0$ заключаем, что $a^\frac{p-1}{2} \equiv_p -1$.
+	Значит невычеты~-- не корни, в частности, $f(a) \neq 0$. Но $x^{p-1}\equiv_p 1$, а значит $x^{\frac{p-1}{2}}\equiv_p \pm1$. Имеем $f(x) \equiv_p \pm1 - 1$, а из $f(a) \neq 0$ заключаем, что $a^\frac{p-1}{2} \equiv_p -1$.
+\end{enumerate}
 \end{proof}
 
 Поверим в три утверждения:
 \begin{theorem}[Закон квадратичной взаимности] Если $a$ и $n$ нечетные, то
-$(\frac{a}{n})=(-1)^{\frac{a-1}{2}\cdot\frac{n-1}{2}}(\frac{n}{a})$
+$\left(\frac{a}{n}\right)=(-1)^{\frac{a-1}{2}\cdot\frac{n-1}{2}}\left(\frac{n}{a}\right)$
 \end{theorem}
 \begin{theorem} \hypertarget{multiplicativity}{}
-$(\frac{ab}{n})=(\frac{a}{n})(\frac{b}{n})$
+$\left(\frac{ab}{n}\right)=\left(\frac{a}{n}\right)\left(\frac{b}{n}\right)$
 \end{theorem} \hypertarget{twojacobi}{}
-\begin{theorem} Для нечетного $n>2$ верно $(\frac{2}{n}) = (-1)^\frac{n^2-1}{8}$
+\begin{theorem} Для нечетного $n>2$ верно $\left(\frac{2}{n}\right) = (-1)^\frac{n^2-1}{8}$
 \end{theorem}
 
 \subsection{Достаточное условие простоты числа}
 Следующая теорема лежит в основе теста Соловея-Штрассена.
-\begin{theorem}\hypertarget{solovaytest}{Если} $n$~-- нечетное, и для всех $a$, т.ч. $(a,n)=1$, выполняется $(\frac{a}{n})\equiv_n a^\frac{n-1}{2}$, то $n$~-- простое.
+\begin{theorem}\hypertarget{solovaytest}{Если} $n$~-- нечетное, и для всех $a$, т.ч. $(a,n)=1$, выполняется $\left(\frac{a}{n}\right)\equiv_n a^\frac{n-1}{2}$, то $n$~-- простое.
 \end{theorem}
 \begin{proof}
 Доказывать будем от противного.
-Пусть $n$ бесквадратное: $n=\prod_i p_i$. Зафиксируем $r$ т.ч. $(\frac{r}{p_1})=-1$. По КТО найдется такое $a$, что: 
+Пусть $n$ бесквадратное: $n=\prod_i p_i$. Зафиксируем $r$ т.ч. $\left(\frac{r}{p_1}\right)=-1$. По КТО найдется такое $a$, что:
 $$\begin{cases}
 a\equiv_{p_1} r\\
-a\equiv_{p_i} 1, & i\ne1. 
+a\equiv_{p_i} 1, & i\ne1.
 \end{cases}$$
-Тогда, учитывая $(\frac{1}{x}) = 1$: $$(\frac{a}{n})=(\frac{a}{p_1})\cdot\prod_{i\ne1}(\frac{a}{p_i})=(\frac{r}{p_1})\cdot\prod_{i\ne1}(\frac{1}{p_i})=-1.$$ Но из определения $a$ имеем $a^\frac{n-1}{2}\equiv_{p_2}1$, а по условию $(\frac{a}{n})\equiv_{p_2} a^\frac{n-1}{2}$. Противоречие.
+Тогда, учитывая $\left(\frac{1}{x}\right) = 1$: $$\left(\frac{a}{n}\right)=\left(\frac{a}{p_1}\right)\cdot\prod_{i\ne1}\left(\frac{a}{p_i}\right)=\left(\frac{r}{p_1}\right)\cdot\prod_{i\ne1}\left(\frac{1}{p_i}\right)=-1.$$ Но из определения $a$ имеем $a^\frac{n-1}{2}\equiv_{p_2}1$, а по условию $\left(\frac{a}{n}\right)\equiv_{p_2} a^\frac{n-1}{2}$. Противоречие.
 
-$ $
-
-Предположим теперь, что в $n$ есть квадраты~-- $n=p^{2+\alpha}\cdot\prod_{i} p_i^{\alpha_i}$. 
-Заметим сначала, что $(\frac{x^{n-1}}{n})=(\frac{x}{n})^{n-1}=1$, то есть $x^{n-1}$~-- всегда квадратичный вычет (разумеется, когда $x\not\equiv_n 0$).
-Пусть $r$~-- первообразный корень по модулю $p^2$ ($\iff$ $r$~-- порождающий $\mathbb Z_{p^2}^*$), возьмем теперь $m$, как в предыдущем случае (такое есть опять по КТО): 
+Предположим теперь, что в $n$ есть квадраты~-- $n=p^{2+\alpha}\cdot\prod_{i} p_i^{\alpha_i}$.
+Заметим сначала, что $\left(\frac{x^{n-1}}{n}\right)=\left(\frac{x}{n}\right)^{n-1}=1$, то есть $x^{n-1}$~-- всегда квадратичный вычет (разумеется, когда $x\not\equiv_n 0$).
+Пусть $r$~-- первообразный корень по модулю $p^2$ ($\iff$ $r$~-- порождающий $\mathbb Z_{p^2}^*$), возьмем теперь $m$, как в предыдущем случае (такое есть опять по КТО):
 $$\begin{cases}
 m\equiv_{p^2} r \\
-m\equiv_{p_i^{\alpha_i}} 1.
-\end{cases}$$ 
-Тогда $(m,n)=1$ (так как $m$ не кратно никакому $p_i$ и $p$), пользуемся предположением леммы: 
-$$m^{n-1}\equiv_n (m^\frac{n-1}{2})^2\equiv_n (\frac{m}{n})^2\equiv_n1,$$ тем более $m^{n-1}\equiv_{p^2}1$. Но, как мы помним, $m\equiv_{p^2}r$, значит $r^{n-1}\equiv_{p^2}1$, тогда \\$\phi(p^2)=p(p-1)|n-1$.
-Итого $p|n$ и $p|n-1$~-- противоречие.
+m\equiv_{p_i^{\alpha_i}} 1
+\end{cases}$$
+Тогда $(m,n)=1$ (так как $m$ не кратно никакому $p_i$ и $p$), пользуемся предположением леммы:
+$$m^{n-1}\equiv_n \left(m^\frac{n-1}{2}\right)^2\equiv_n \left(\frac{m}{n}\right)^2\equiv_n1,$$ тем более $m^{n-1}\equiv_{p^2}1$. Но, как мы помним, $m\equiv_{p^2}r$, значит $r^{n-1}\equiv_{p^2}1$, тогда $\phi(p^2)=p(p-1)|n-1$. Итого $p|n$ и $p|(n-1)$~-- противоречие.
 \end{proof}
 
 \subsection{Описание алгоритма и вероятность ошибки}
-Нам понадобится вспомогательный алгоритм \textbf{вычисления $(\frac{m}{n})$} для нечетных $n$. Мы можем разбираться с двойками в <<числителе>>, пользуясь \hyperlink{multiplicative}{теоремой 1.3} и \hyperlink{twojacobi}{теоремой 1.4}. Когда же и <<числитель>>, и <<знаменатель>> нечетные, то, подобно алгоритму Евклида, мы пользуемся \hyperlink{qreciproc}{законом квадратичной взаимности} всякий раз, когда <<числитель>> меньше <<знаменателя>>, а далее заменяем <<числитель>>  на его остаток от деления на <<знаменатель>> по \hyperlink{aequivb}{лемме 1.1}. 
+Нам понадобится вспомогательный алгоритм \textbf{вычисления $\left(\frac{m}{n}\right)$} для нечетных $n$. Мы можем разбираться с двойками в <<числителе>>, пользуясь \hyperlink{multiplicative}{теоремой 1.3} и \hyperlink{twojacobi}{теоремой 1.4}. Когда же и <<числитель>>, и <<знаменатель>> нечетные, то, подобно алгоритму Евклида, мы пользуемся \hyperlink{qreciproc}{законом квадратичной взаимности} всякий раз, когда <<числитель>> меньше <<знаменателя>>, а далее заменяем <<числитель>>  на его остаток от деления на <<знаменатель>> по \hyperlink{aequivb}{лемме 1.1}.
 
 Приведем пример.
-$$(\frac{14}{11}) = (-1)^\frac{11^2-1}{2}(\frac{7}{11}) = (\frac{7}{11}) = (-1)^\frac{7-1}{2}(-1)^\frac{11-1}{2}(\frac{11}{7}) = (\frac{11}{7}) = (\frac{4}{7}) = (\frac{2}{7})\cdot(\frac{2}{7}) = 1$$
+$$\left(\frac{14}{11}\right) = (-1)^\frac{11^2-1}{2}\left(\frac{7}{11}\right) = \left(\frac{7}{11}\right) = (-1)^\frac{7-1}{2}(-1)^\frac{11-1}{2}\left(\frac{11}{7}\right) = \left(\frac{11}{7}\right) = \left(\frac{4}{7}\right) = \left(\frac{2}{7}\right)\cdot\left(\frac{2}{7}\right) = 1$$
 
-Напишем же, наконец, \textbf{алгоритм} проверки числа $n$ на простоту. Выберем случайное $m$ из $[2,\ldots,n-1]$, если $(m,n)\ne 1$, ответ~-- <<не простое>>. Иначе посмотрим на $(\frac{m}{n})$. Надо его сравнить с $m^{\frac{n-1}{2}}$ по модулю $n$. Если равенства нет, то ответ <<не простое>>, который всегда верен (\hyperlink{solovaytest}{теорема 1.5}). Если равенство есть, ответ <<простое>>. О вероятности ошибки в следующей лемме:
-\begin{lemma} Если $n\not\in\mathbb{P}$, то для более чем половины всех $m \in [2, \ldots, n-1]$,\\ взаимно простых с $n$: $$(\frac{m}{n})\not\equiv_n m^{\frac{n-1}{2}}.$$
+Напишем же, наконец, \textbf{алгоритм} проверки числа $n$ на простоту. Выберем случайное $m$ из $[2,\ldots,n-1]$, если $(m,n)\ne 1$, ответ~-- <<не простое>>. Иначе посмотрим на $\left(\frac{m}{n}\right)$. Надо его сравнить с $m^{\frac{n-1}{2}}$ по модулю $n$. Если равенства нет, то ответ <<не простое>>, который всегда верен (\hyperlink{solovaytest}{теорема 1.5}). Если равенство есть, ответ <<простое>>. О вероятности ошибки в следующей лемме:
+\begin{lemma} Если $n\not\in\mathbb{P}$, то для более чем половины всех $m \in [2, \ldots, n-1]$, взаимно простых~с~$n$: $$\left(\frac{m}{n}\right)\not\equiv_n m^{\frac{n-1}{2}}$$
 \end{lemma}
 \begin{proof}
-Пусть числа $b_1, b_2, \ldots, b_k \in \{2, \ldots, n-1\}$~-- все числа, для которых $(\frac{b_i}{n})\equiv_n b_i^\frac{n-1}{2}$ и $(b_i,n)=1$. Сейчас мы покажем, что $k \leq \frac{n}{2}$, откуда и будет следовать требуемое.
+Пусть числа $b_1, b_2, \ldots, b_k \in \{2, \ldots, n-1\}$~-- все числа, для которых $\left(\frac{b_i}{n}\right)\equiv_n b_i^\frac{n-1}{2}$ и $(b_i,n)=1$. Сейчас мы покажем, что $k \leq \frac{n}{2}$, откуда и будет следовать требуемое.
 
 По \hyperlink{solovaytest}{теореме 1.5} $\exists a: (a,n)=1, (\frac{a}{n})\not\equiv_n a^\frac{n-1}{2}$. Посмотрим на  числа $b_i' = ab_i \mod {n}$. Во-первых, все $b_i'$ попарно различны: если $ab_i \equiv_n ab_j$, то $b_i \equiv_n b_j$, так как $(a,n)=1$. Кроме того, никакой $b_i'$ не совпадает ни с каким $b_j$, так как
-$$(\frac{ab_i}{n})=(\frac{a}{n})(\frac{b_i}{n})=(\frac{a}{n})\cdot b_i^\frac{n-1}{2}\not\equiv_n (ab_i)^\frac{n-1}{2},$$
-но для всех $b_j$ по определению верно $(\frac{b_j}{n}) \equiv_n b_j^\frac{n-1}{2}$.
+$$\left(\frac{ab_i}{n}\right)=\left(\frac{a}{n}\right)\left(\frac{b_i}{n}\right)=\left(\frac{a}{n}\right)\cdot b_i^\frac{n-1}{2}\not\equiv_n (ab_i)^\frac{n-1}{2},$$
+но для всех $b_j$ по определению верно $\left(\frac{b_j}{n}\right) \equiv_n b_j^\frac{n-1}{2}$.
 
 Итак, мы получили $2k$ различных чисел $b_1, \ldots, b_k, b_1', \ldots, b_k'$, лежащих в $\{0, \ldots, n-1\}$, откуда по принципу Дирихле $2k \leq n$.
 \end{proof}
