@@ -8,6 +8,7 @@
 \usepackage{comment}
 \usepackage{hyperref}
 \usepackage{pgffor}
+\usepackage{epigraph}
 
 % Margins
 \usepackage[top=2.5cm, left=3cm, right=3cm, bottom=3.0cm]{geometry}
@@ -46,12 +47,20 @@
 \newtheorem{problem}{Задача}[section]
 \newtheorem{lemma}{Лемма}[section]
 \newtheorem{corollary}{Следствие}[section]
+\newtheorem{nb}{NB}[section]
 
 \newtheorem*{theorem*}{Теорема}
 \newtheorem*{definition*}{Определение}
 \newtheorem*{example*}{Пример}
 \newtheorem*{problem*}{Задача}
 \newtheorem*{lemma*}{Лемма}
+\newtheorem*{nb*}{NB}
+
+% My environments
+\newcommand*{\QEDTRIANGLE}{\null\nobreak\hfill\ensuremath{\bigtriangleup}} 
+\newenvironment{algodescription}[1]
+    {\noindent\textbf{#1.}}
+    {\QEDTRIANGLE}
 
 %Author tags
 \newcommand{\groth} {Нечаев~Е.}
@@ -75,7 +84,7 @@
 % Чтобы скомпилировать все, что есть, впишите:
 % \foreach \n \in {1,...,15,17,19,20,21} {\input{que\n.tex}} 
 % ВМЕСТО строки ниже
-\foreach \n in {1,...,17,19,20,21} {\input{que\n.tex}}
+\foreach \n in {1,...,15,16,17,18,19,20,21} {\input{que\n.tex}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % que6.tex ссылается на que5.tex
