@@ -63,7 +63,7 @@
 	\SetKwProg{Fn}{}{:}{}
 	\Fn{\Relabel{$u\in V$}}{
 		\If{$e(u)>0$ {\normalfont\bf and} $\forall v\in \{x|(u,x)\in E_f\}\colon h(u)\le h(v)$}{
-			$h(u)$ += $1+\min_{(u,v)\in E_f}\{h(v)\}$\;
+			$h(u)$ := $1+\min_{(u,v)\in E_f}\{h(v)\}$\;
 		}
 	}
 \end{algorithm}
