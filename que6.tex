@@ -6,7 +6,7 @@
 
 \begin{algodescription}{Приближенное $H_n$-оптимальное решение}
 
-Вот вполне интуитивный <<жадник>>:
+Вот вполне интуитивный <<жадник>>. Мы обозначим $\hat{S}_j$ ~-- множество пока не покрытых элементов $S_j$. Каждый раз будем включать покрытие множество с минимальным <<удельным весом>> $\frac{w_j}{\hat{S}_j}$.
 
 \begin{algorithm}[H]
 	\DontPrintSemicolon
@@ -18,13 +18,14 @@
 	\Fn{\Greedy{$E=[e_1,\ldots,e_n]$,$S=[S_1,\ldots,S_m]$,$w=[w_1,\ldots,w_m]$}}{
 		$I=[]$\;
 		$\hat{S}_1,\ldots,\hat{S}_m=S_1,\ldots,S_m$\;
-		\While{$\bigcup I \neq  E$}{
+		\While{$\bigcup_{i\in I}\hat{S}_i \neq  E$}{
 			$l=$ любой индекс $j$ т.ч. $\hat{S}_j \neq \varnothing$ и $\frac{w_j}{|\hat{S}_j|}$ минимально\;
-			Добавить $S_l$ в $I$\;
+			Добавить $l$ в $I$\;
 			\For{$j=1\ldots m$}{
 				$\hat{S}_j = \hat{S}_j\smallsetminus S_l$\;
 			}
 		}
+		\KwRet{\textup{I}}
 	}
 \end{algorithm}
 $ $
@@ -38,7 +39,7 @@ $ $
 \begin{proof}
     Пусть алгоритм сделал $l$ итераций. За $n_k$ обозначим количество непокрытых элементов $E$ перед $k$-той итерацией (полагаем по определению $n_{l+1}=0$). Так, $n = n_1 > \ldots > n_{l+1} = 0$.
 
-    \textbf{Пока поверим}, что если на $k$-той итерации выбрано множество $S_i$, то справедливо неравенство:
+    \textbf{Пока поверим}, что если на $k$-той итерации выбрано множество $S_i$ веса $w_i$, то справедливо неравенство:
 
     $$w_i \leq \frac{n_k - n_{k+1}}{n_k}OPT$$
 
@@ -47,7 +48,7 @@ $ $
     $$\sum_{j\in I}w_j \leq \sum_{k=1}^l\frac{n_k-n_{k+1}}{n_k} OPT$$
     $$ = OPT\cdot\sum_{k=1}^l\left(\underbrace{\frac{1}{n_k} + \cdots + \frac{1}{n_k}}_{n_k-n_{k+1}\text{ раз}}\right)$$
     $$ \leq OPT \cdot\sum_{k=1}^l\left(\frac{1}{n_k} + \frac{1}{n_k - 1} + \cdots + \frac{1}{n_{k+1}+1}\right)$$
-    $$ = OPT\cdot\sum_{k=1}^n\frac{1}{k} = OPT\cdot H_n$$
+	$$ = OPT\cdot\sum_{t=1}^n\frac{1}{t} = OPT\cdot H_n$$
     Это и требовалось. Теперь доказываем неравенство $w_i \leq \frac{n_k - n_{k+1}}{n_k}OPT$.
 
     Для данной итерации $k$ и выбранного на ней элемента $S_i$ обозначим $I_k$~-- множество индексов, выбранных на итерациях $1, \ldots, k-1$, а для всякого $j=1\ldots m$ положим $\hat{S}_j = S_j \smallsetminus\left( \bigcup_{p \in I_k}S_p\right)$~-- множество элементов из $S_j$, которые были покрыты на $k$-той итерации. Заметьте, что получается ровно те $\hat{S}_j$, которые фигурируют в псевдокоде. По смыслу алгоритма получается $$\frac{w_i}{|\hat{S}_i|} = \min_{j:\, \hat{S}_j\neq\varnothing} \frac{w_j}{|\hat{S}_j|}.$$
