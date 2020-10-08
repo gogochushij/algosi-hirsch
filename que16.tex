@@ -1,5 +1,7 @@
 \newcommand{\divisible}{\mathop{\raisebox{-2pt}{\vdots}}}
-\section{Вероятностная проверка на простоту: алгоритм Соловея-Штрассена. (Ермошин И., Осипов Д.)}
+\section{Вероятностная проверка на простоту: алгоритм Соловея-Штрассена}
+
+\secauthor{\ivan, \denis}
 
 \subsection{Теоретико-числовые основания}
 Под $\equiv_p$ имеется в виду <<сравнимо по модулю $p$>>.
@@ -84,7 +86,7 @@ $$m^{n-1}\equiv_n \left(m^\frac{n-1}{2}\right)^2\equiv_n \left(\frac{m}{n}\right
 \end{algodescription}
 
 Приведем пример.
-$$\left(\frac{14}{11}\right) = (-1)^\frac{11^2-1}{2}\left(\frac{7}{11}\right) = \left(\frac{7}{11}\right) = (-1)^\frac{7-1}{2}(-1)^\frac{11-1}{2}\left(\frac{11}{7}\right) = \left(\frac{11}{7}\right) = \left(\frac{4}{7}\right) = \left(\frac{2}{7}\right)\cdot\left(\frac{2}{7}\right) = 1$$
+$$\left(\frac{14}{11}\right) = (-1)^\frac{11^2-1}{8}\left(\frac{7}{11}\right) = - \left(\frac{7}{11}\right) = -(-1)^{\frac{7-1}{2}\frac{11-1}{2}}\left(\frac{11}{7}\right) = \left(\frac{11}{7}\right) = \left(\frac{4}{7}\right) = \left(\frac{2}{7}\right)\cdot\left(\frac{2}{7}\right) = 1$$
 
 Напишем же, наконец, \textbf{алгоритм} проверки числа $n$ на простоту.
 

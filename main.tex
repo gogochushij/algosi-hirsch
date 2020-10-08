@@ -8,6 +8,8 @@
 \usepackage{comment}
 \usepackage{hyperref}
 \usepackage{epigraph}
+\usepackage{enumitem}
+
 
 % Margins
 \usepackage[top=2.5cm, left=3cm, right=3cm, bottom=3.0cm]{geometry}
@@ -26,20 +28,19 @@
 
 % My commands
 \newcommand{\e}{\varepsilon}
-\newcommand{\needpicture} {
-    {
-        \begin{center}
-        \rowcolors{1}{yellow!75}{yellow!75}
-        \begin{tabular}{|c|}
-            \hline
-            Здесь нужна картинка\\
-            \hline
-        \end{tabular}
-        \end{center}
-    }
-}
 \newcommand{\heart}{\ensuremath\heartsuit}
+\newcommand{\secauthor}[1]{
+\begin{center}
+    \footnotesize{\textit{(Автор(ы): #1)}}
+\end{center}
+}
+%%%Author tags
+\newcommand{\denis}{Осипов Денис}
+\newcommand{\egor}{Нечаев Егор}
+\newcommand{\ivan}{Ермошин Иван}
+%%%
 
+% My commands (continued)
 \newtheorem{theorem}{Теорема}[section]
 \newtheorem{definition}{Определение}[section]
 \newtheorem{example}{Пример}[section]
@@ -61,19 +62,18 @@
     {\noindent\textbf{#1.}}
     {\QEDTRIANGLE}
 
-%Author tags
-\newcommand{\groth} {Нечаев~Е.}
+
 
 %%%%%%%%%%%%%%%%%
 %     Title     %
 %%%%%%%%%%%%%%%%%
-\title{Алгосы, часть ii$_\beta$}
-\author{Денис Осипов, Иван Ермошин, Егор Нечаев}
+\title{Алгосы, часть ii}
+\author{Денис Осипов, Иван Ермошин, Егор Нечаев, Эдуард Алексеевич Гирш}
 \date{\today}
 
 \begin{document}
 
-%\includepdf{figures/frontcover.pdf}
+\includepdf{figures/frontcover.pdf}
 
 \maketitle
 
@@ -82,11 +82,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Здесь настроить конспект для компиляции
-% Чтобы скомпилировать все, что есть, впишите:
-% \foreach \n \in {1,...,15,16,17,18,19,20,21} {\input{que\n.tex}}
-% ВМЕСТО строки ниже
-\foreach \n in {1,...,21} {\input{que\n.tex}}
+\foreach \n in {1,...,18,20,21} {\input{que\n.tex}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{apx_listofque.tex}
+
+\input{apx_sources.tex}
 
 % que6.tex ссылается на que5.tex
 % que21.tex ссылается на que20.tex

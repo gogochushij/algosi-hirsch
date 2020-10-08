@@ -1,0 +1,125 @@
+\section*{Источники и программа ii части экзамена}
+\addcontentsline{toc}{section}{Источники и программа ii части экзамена}
+
+\newcommand{\smallblue}[1]{\noindent {\footnotesize\color{blue} #1}}
+
+\subsection*{Параллельные алгоритмы}
+\begin{enumerate}[wide, labelwidth=!, labelindent=0pt]
+
+\item Булевы схемы как модель параллельных вычислений. Принцип Брента. Умножение булевых матриц. Достижимость в графе (через возведение матрицы в степень). Вычисление всех префиксов суммы. Параллельное сложение и умножение чисел. 
+
+\smallblue{Литература: Christos Papadimitriou. Computational Complexity. Addison-Wesley, 1994. Section 15.1.
+}
+
+\item Вычисление номера элемента списка с конца. Вычисление глубин всех вершин дерева.
+
+\smallblue{Литература: Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest. Introduction to Algorithms. MIT Press, 1990. Section 30.1. \url{http://staff.ustc.edu.cn/~csli/graduate/algorithms/book6/chap30.htm}
+
+Есть русский перевод, но нужно именно первое издание – в последующих параллельных вычислений нет: \url{https://e-maxx.ru/bookz/files/cormen.pdf}
+}
+\end{enumerate}
+
+\subsection*{Оптимизационные задачи и приближенные алгоритмы}
+
+\begin{enumerate}[wide, labelwidth=!, labelindent=0pt] \setcounter{enumi}{2}
+
+\item Приближенные алгоритмы для задачи о рюкзаке (Knapsack).
+
+\smallblue{Литература: С. Дасгупта, Х. Пападимитриу, У. Вазирани. Алгоритмы. (В пер. А.С.Куликова). МЦНМО, 2014. \url{https://alexanderskulikov.github.io/files/algorithms_href.pdf}. Раздел 9.2.4.
+
+Альтернатива --- конспект \url{https://logic.pdmi.ras.ru/~hirsch/students/effalg-2001/lecture9.pdf}.Раздел 9.1.
+}
+
+\item Приближенные алгоритмы для задачи о покрытии множествами (Set Cover): сведение к задаче линейного программирования (со следствие для задачи вершинного покрытия (Vertex Cover)), двойственная задача, прямо-двойственный (primal-dual) метод, жадный алгоритм.
+
+\smallblue{Литература: David P. Williamson and David B. Shmoys. The Design of Approximation Algorithms. Cambridge University Press, 2010. Sections 1.2-1.6.
+
+Жадный алгоритм есть также в конспекте \url{https://logic.pdmi.ras.ru/~hirsch/students/effalg-2001/lecture9.pdf}. Раздел 9.2.
+}
+
+\item Задача о максимальном потоке. Теорема о максимальном потоке и минимальном разрезе. Алгоритм Форда-Фалкерсона. Случай целочисленных весов. Применение к задаче о максимальном паросочетании в двудольном графе. Алгоритм Эдмондса-Карпа. Алгоритм проталкивания предпотока.
+
+\smallblue{Литература: Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest. Introduction to Algorithms. MIT Press, 1990. Chapter 27. Есть русский перевод. Эти алгоритмы есть в любом издании, в зависимости от издания глава 26 или другая.
+
+Альтернатива --- John Kleinberg, Eva Tardos. Algorithm Design. Pearson, 2006. Sections 7.1-7.5. \url{http://www.cs.sjtu.edu.cn/~jiangli/teaching/CS222/files/materials/Algorithm\%20Design.pdf}
+}
+
+\item Приближённые алгоритмы для задачи коммивояжера в метрическом пространстве (без алгоритмов для минимального остовного дерева и минимального совершенного паросочетания).
+
+\smallblue{Литература: конспект \url{https://logic.pdmi.ras.ru/~hirsch/students/effalg-2001/lecture9.pdf}. Раздел 9.4.
+}
+
+\item Алгоритмы Прима и Крускала для задачи о минимальном остовном дереве.
+
+\smallblue{Литература: Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest. Introduction to Algorithms. MIT Press, 1990. Chapter 24.
+
+Есть русский перевод. Эти алгоритмы есть в любом издании, в зависимости от издания глава 23 или другая.
+}
+\end{enumerate}
+
+\subsection*{Вероятностные алгоритмы}
+
+\begin{enumerate}[wide, labelwidth=!, labelindent=0pt] \setcounter{enumi}{7}
+
+\item Вероятностные алгоритмы с односторонней ограниченной вероятностью ошибки. Алгоритм Фрейвальдса для проверки умножения матриц.
+
+\smallblue{Литература: конспект \url{https://logic.pdmi.ras.ru/~hirsch/students/effalg-2001/lecture1.pdf}. Раздел 1.3.
+}
+
+\item Сравнение строк на расстоянии и алгоритм Рабина-Карпа.
+
+\smallblue{Литература: конспект \url{https://logic.pdmi.ras.ru/~hirsch/students/effalg-2001/lecture1.pdf}. Раздел 1.5.
+}
+
+\item Randomized QuickSort.
+
+\smallblue{Литература: Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest. Introduction to Algorithms. MIT Press, 1990. Chapter 8. 
+
+Есть русский перевод. Этот алгоритм есть в любом издании, в зависимости от издания глава 7 или другая.
+}
+
+\item Проверка равенства полиномов. Лемма Шварца-Циппеля.
+
+\smallblue{Литература: М.Солтис. Введение в анализ алгоритмов. ДМК, 2019. Лемма 6.3.
+}
+
+\item Вероятностная проверка простоты: алгоритм Соловея-Штрассена.
+
+\smallblue{Литература: конспект \url{https://logic.pdmi.ras.ru/~hirsch/students/effalg-2001/lecture8.pdf} Раздел 8.1.
+
+(там отсутствует доказательство критерия Эйлера, но его можно посмотреть хоть в википедии \url{https://en.wikipedia.org/wiki/Euler\%27s_criterion})
+}
+
+\item Хеш-таблицы. Универсальные семейства хеш-функций. Совершенное хеширование.
+
+\smallblue{Литература: М.А.Бабенко, М.В.Левин: Введение в теорию алгоритмов и структур данных. МЦНМО, 2016. Раздел 5. Альтернатива – всё, кроме совершенного хеширования, есть в Thomas H. Cormen, Charles E. Leiserson, and Ronald L. Rivest. Introduction to Algorithms. MIT Press, 1990. Разделы 12.2, 12.3.3.
+
+Есть русский перевод. Это есть в любом издании, в зависимости от издания глава 11 или другая.
+}
+
+\item Линейный вероятностный алгоритм для минимального остовного дерева (без алгоритма верификации).
+
+\smallblue{Литература: конспект \url{https://logic.pdmi.ras.ru/~hirsch/students/effalg-2001/lecture6.pdf}. Раздел 6.2
+}
+
+\item Слабоэкспоненциальные алгоритмы для 3-SAT (детерминированные и вероятностный).
+
+\smallblue{
+Литература: \href{https://drive.google.com/file/d/1VuiRy7RSX9AbnaDgrAnNO5tQFhuF38tQ/view?usp=sharing}{слайды}
+}
+
+\end{enumerate}
+
+\subsection*{Online-алгоритмы}
+
+\begin{enumerate}[wide, labelwidth=!, labelindent=0pt] \setcounter{enumi}{15}
+\item Алгоритм для задачи кеширования.
+
+\smallblue{Материалы: \href{https://drive.google.com/file/d/1zswiwOhxnbeAKITohZ2-8xOjcsLIjJhY/view?usp=sharing}{видео}, \href{https://drive.google.com/file/d/1-8KPQu9iJFFUzFjeEqdbPSt6bRBW10tT/view?usp=sharing}{слайды}
+}
+
+\item Алгоритм для онлайн-варианта задачи о покрытии множествами (случай единичных весов и общий случай).
+
+\smallblue{Материалы: \href{https://drive.google.com/file/d/1Iyor1MbXwP4o6hvtSkZyB0Ql5K-bFLjN/view?usp=sharing}{видео}, \href{https://drive.google.com/file/d/1nuRkh5KggZCWTM-5ub2BSeEoF9O2ds6c/view?usp=sharing}{слайды}
+}
+\end{enumerate}

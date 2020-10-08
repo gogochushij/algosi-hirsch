@@ -1,4 +1,7 @@
-\section{Параллельные алгоритмы~-- ii (Осипов Д.)}
+\section{Параллельные алгоритмы~-- ii}
+
+\secauthor{\denis}
+
 \subsection{Параллельное вычисление всех префиксных сумм}\label{parallel_sums}
 \begin{problem*}
 	Дан массив $A[0\ldots n-1]$. Вычислить все его префиксные суммы, т.е. суммы вида $A[0]+A[1]+\ldots+A[i]$.
@@ -31,7 +34,7 @@
 			}\;
 			\PrefixSum{\textup{B}}\;\;
 			\Parallel \For{$i = 0\ldots(n-1)$}{
-				\eIf{$i>0$}{
+				\eIf{$i$ четное}{
 					A$[i]$ = B$\left[\frac{i}{2}-1\right]$ + A$[i]$\;
 				}{
 					A$[i]$ = B$\left[\frac{i-1}{2}\right]$\;
